@@ -12,13 +12,12 @@ import { TimerStatusEnum } from './shared/constants';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(public loaderService: LoaderService) {
+  constructor(public loaderService: LoaderService) {  }
 
-    const workoutRestTime = new WorkoutRestTime();
-    workoutRestTime.restTimeMilliseconds = 10000;
+   async startTimer() {
+    const workoutRestTime = new WorkoutRestTime(3000);
     const workout = new Workout({ basePyramid: 5, apexPyramid: 1, reverse: true }, 8, workoutRestTime);
-    console.log(workout);
-
+    await workout.workoutRestTime.startTimer();
    }
 
 
