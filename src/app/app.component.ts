@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Training } from './models/training';
 import { LoaderService } from './services/loader.service';
+import { TimerStatusEnum } from './shared/constants';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +10,7 @@ import { LoaderService } from './services/loader.service';
 })
 export class AppComponent {
   constructor(public loaderService: LoaderService) {
-    this.loaderService.show()
+    const training = new Training();
    }
 
 
