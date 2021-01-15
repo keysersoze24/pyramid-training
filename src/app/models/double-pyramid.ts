@@ -10,14 +10,14 @@ export class DoublePyramid {
       for (let i = this._apexPyramid; i <= this._basePyramid; i++) {
         result.push(i);
       }
-      for (let i = this._basePyramid; i >= this._apexPyramid; i--) {
+      for (let i = this._basePyramid - 1; i >= this._apexPyramid; i--) {
         result.push(i);
       }
     } else {
       for (let i = this._basePyramid; i >= this._apexPyramid; i--) {
         result.push(i);
       }
-      for (let i = this._apexPyramid; i <= this._basePyramid; i++) {
+      for (let i = this._apexPyramid + 1; i <= this._basePyramid; i++) {
         result.push(i);
       }
     }

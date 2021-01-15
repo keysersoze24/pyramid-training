@@ -1,4 +1,4 @@
-import { DoublePyramid } from "./pyramid";
+import { DoublePyramid } from "./double-pyramid";
 import { WorkoutRestTime } from "./training-rest-time";
 import { Workout } from "./workout";
 
