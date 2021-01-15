@@ -1,5 +1,14 @@
-<app-toolbar></app-toolbar>
+<mat-toolbar>
+    Pyramid training
+</mat-toolbar>
 
 <div class="container">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>
+
+<div id="spinner-container" *ngIf="loaderService.isVisible() | async">
+    <mat-spinner color="accent"></mat-spinner>
+</div>
+
+
+

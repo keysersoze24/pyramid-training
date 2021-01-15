@@ -1,0 +1,25 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+
+$pyramid-training-primary: mat-palette($mat-indigo);
+$pyramid-training-accent: mat-palette($mat-pink, A200, A100, A400);
+$pyramid-training-warn: mat-palette($mat-red);
+
+
+$pyramid-training-theme: mat-light-theme((
+  color: (
+    primary: $pyramid-training-primary,
+    accent: $pyramid-training-accent,
+    warn: $pyramid-training-warn,
+  )
+));
+
+
+@include angular-material-theme($pyramid-training-theme);
+
+:root {
+  --primary: #{mat-color($pyramid-training-primary)};
+  --accent: #{mat-color($pyramid-training-accent)};
+  --warn: #{mat-color($pyramid-training-warn)};
+}
