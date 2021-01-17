@@ -1,14 +1,15 @@
 import { DoublePyramid } from "./double-pyramid";
-import { WorkoutRestTime } from "./training-rest-time";
+import { RestTime } from "./rest-time";
+
 
 export class Workout {
   doublePyramids: DoublePyramid [] = [];
-  workoutRestTime: WorkoutRestTime;
+  workoutRestTime: RestTime;
 
   constructor(
     doublePyramid: { basePyramid: number, apexPyramid: number, reverse: boolean },
     doublePyramidReps: number,
-    workoutRestTime: WorkoutRestTime
+    workoutRestTime: RestTime
     ) {
     const dp = new DoublePyramid(doublePyramid.basePyramid, doublePyramid.apexPyramid, doublePyramid.reverse);
       for (let i = 0; i < doublePyramidReps; i++) {

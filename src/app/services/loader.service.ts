@@ -20,7 +20,7 @@ export class LoaderService {
   }
 
   isVisible() {
-    return this._isVisible$.asObservable().pipe(share())
+    return this._isVisible$.asObservable().pipe(share());
   }
 
 }

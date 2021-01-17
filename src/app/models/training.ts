@@ -1,10 +1,10 @@
 import { DoublePyramid } from "./double-pyramid";
-import { WorkoutRestTime } from "./training-rest-time";
+import { RestTime } from "./rest-time";
 import { Workout } from "./workout";
 
 export class Training {
   name: string;
-  preWorkoutRestTimeMillisecond: WorkoutRestTime;
+  preWorkoutRestTimeSeconds: RestTime;
   workout: Workout;
-  postWorkoutRestTimeMillisecond: WorkoutRestTime;
+  postWorkoutRestTimeSeconds: RestTime;
 }
