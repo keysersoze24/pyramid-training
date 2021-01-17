@@ -1,9 +1,16 @@
+import { DoublePyramidStepStatusEnum } from "../shared/constants";
+import { RestTime } from "./rest-time";
+
 export class DoublePyramid {
   private _basePyramid: number;
   private _apexPyramid: number;
   private _reverse: boolean = true;
+  private _currentStep: number = 0;
 
-  get pyramid(): number [] {
+  get currentStep(): number { return this._currentStep };
+  set currentStep(value: number) { this._currentStep = value };
+
+  get doublePyramid(): number [] {
     let result: number [] = [];
 
     if (this._reverse) {
@@ -25,7 +32,7 @@ export class DoublePyramid {
   }
 
 
-  constructor(basePyramid: number, apexPyramid: number, reverse?: boolean) {
+  constructor(basePyramid: number, apexPyramid: number, reverse: boolean) {
     if (reverse != null || reverse != undefined) {
        this._reverse = reverse;
     }
@@ -35,6 +42,10 @@ export class DoublePyramid {
         this._apexPyramid = apexPyramid;
       }
     }
+  }
+
+  incrementStep() {
+    this._currentStep = this._currentStep + 1;
   }
 
 }

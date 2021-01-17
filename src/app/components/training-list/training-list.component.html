@@ -1,0 +1,3 @@
+<div *ngFor="let training of (trainingService.getAllTrainings() | async)">
+  {{ training.name }}
+</div>

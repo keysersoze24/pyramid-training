@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { RestTime } from './models/rest-time';
 import { Workout } from './models/workout';
 import { LoaderService } from './services/loader.service';
-import { TimerService } from './services/timer.service';
 import { TimerStatusEnum } from './shared/constants';
 
 @Component({
@@ -11,20 +11,6 @@ import { TimerStatusEnum } from './shared/constants';
 })
 export class AppComponent {
 
-  workout: Workout;
-
-  constructor(public loaderService: LoaderService, public timerService: TimerService) {
-    this.startTimer(10);
-  }
-
-
-   async startTimer(seconds: number) {
-    const timerStatus = await this.timerService.startTimer(seconds);
-    if (timerStatus == TimerStatusEnum.Expired) {
-      window.alert('timer expired');
-    }
-   }
-
-
+  constructor(public loaderService: LoaderService) { }
 
 }

@@ -6,14 +6,6 @@
     <router-outlet></router-outlet>
 </div>
 
-<div id="timer-container">
-  <div>
-    seconds left: {{ this.timerService.getSecondsLeft() | async }}
-  </div>
-  <div>
-    seconds passed: {{ this.timerService.getSecondElapsed() | async }}
-  </div>
-</div>
 
 <div id="spinner-container" *ngIf="loaderService.isVisible() | async">
     <mat-spinner color="accent"></mat-spinner>
