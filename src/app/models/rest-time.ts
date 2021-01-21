@@ -5,18 +5,18 @@ import { TimerStatusEnum } from "../shared/constants";
 export class RestTime {
   private _secondsElapsed$: BehaviorSubject<number> = new BehaviorSubject(0);
   private _secondsLeft$: BehaviorSubject<number> = new BehaviorSubject(0);
-  private _secondsSet: number;
+  secondsSet: number;
 
   constructor(seconds: number) {
-    this._secondsSet = seconds;
+    this.secondsSet = seconds;
   }
 
   startTimer(): Promise<TimerStatusEnum> {
     return new Promise((resolve, reject) => {
-      this.updateSecondsValue(this._secondsSet);
+      this.updateSecondsValue(this.secondsSet);
       setTimeout(() => {
         resolve(TimerStatusEnum.Expired);
-      }, this._secondsSet * 1000);
+      }, this.secondsSet * 1000);
     })
   }
 

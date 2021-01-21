@@ -1,6 +1,18 @@
-<app-training-list></app-training-list>
+<div *ngIf="(trainigService.getAllTrainings() | async)?.length">
+  <h3> Training List </h3>
+  <app-training-list></app-training-list>
+</div>
+
+<div *ngIf="!(trainigService.getAllTrainings() | async)?.length">
+  <mat-card>
+    <h3> Welcome to Pyramid training, click + button to create a new one </h3>
+  </mat-card>
+
+</div>
 
 
-<button mat-icon-button (click)="generateTraining()" id="generate-training-button">
-  <mat-icon>add</mat-icon>
+
+
+<button mat-icon-button (click)="newTraining()" id="new-training-button">
+  <mat-icon color="accent">add_circle</mat-icon>
 </button>

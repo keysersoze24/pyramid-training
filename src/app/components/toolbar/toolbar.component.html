@@ -1,0 +1,19 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="col-2" *ngIf="currentPath != RoutesPathEnum.Home">
+      <button mat-icon-button color="accent" (click)="navigateBack()">
+        <mat-icon>
+          arrow_back
+        </mat-icon>
+      </button>
+    </div>
+
+    <div [ngClass]="currentPath != RoutesPathEnum.Home? 'col-4' : 'col-6'">
+        Pyramid training
+    </div>
+
+    <div class="col-6 d-flex justify-content-end">
+      <img src="assets/pyramid.png" height="40">
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

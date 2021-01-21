@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { Training } from '../models/training';
 
@@ -12,7 +12,7 @@ export class TrainingService {
 
   constructor() { }
 
-  getAllTrainings() {
+  getAllTrainings(): Observable<Training []> {
     return this._allTrainings$.asObservable().pipe(share());
   }
 

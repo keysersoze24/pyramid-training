@@ -1,38 +1,33 @@
+import { BehaviorSubject, Observable } from "rxjs";
+import { share } from "rxjs/operators";
 import { DoublePyramid } from "./double-pyramid";
 import { RestTime } from "./rest-time";
-import { WorkoutStatus } from "./workout-status";
 
 
 export class Workout {
 
   doublePyramids: DoublePyramid [] = [];
-  workoutRestTime: RestTime;
-  doublePyramidRestTime: RestTime;
+  restTime: RestTime;
+  private _currentPyramid$: BehaviorSubject<DoublePyramid> = new BehaviorSubject(null);
 
-  private _workoutStatus: WorkoutStatus = new WorkoutStatus(1, 1);
-  get workoutStatus(): WorkoutStatus { return this._workoutStatus };
-
-  scroll() {
-    if (this.doublePyramids[0].doublePyramid.length == this._workoutStatus.currentDoublePyramidStep) {
-      this._workoutStatus.currentDoublePyramid = this._workoutStatus.currentDoublePyramid + 1;
-    }
-    else {
-      this._workoutStatus.currentDoublePyramidStep = this._workoutStatus.currentDoublePyramidStep + 1;
-    }
+  getCurrentPyramid(): Observable<DoublePyramid> {
+    return this._currentPyramid$.asObservable().pipe(share())
   }
 
-  constructor(
-    doublePyramid: { basePyramid: number, apexPyramid: number, reverse: boolean },
-    doublePyramidReps: number,
-    workoutRestTime: RestTime,
-    doublePyramidRestTime: RestTime
-    ) {
-    const dp = new DoublePyramid(doublePyramid.basePyramid, doublePyramid.apexPyramid, doublePyramid.reverse);
-      for (let i = 0; i < doublePyramidReps; i++) {
-        this.doublePyramids.push(dp);
+  constructor(restTime: RestTime) { this.restTime = restTime };
+
+  async start(): Promise<boolean> {
+    return new Promise(async (resolve, reject) => {
+      for (let i = 0; i < this.doublePyramids.length; i++) {
+        const pyramid = this.doublePyramids[i];
+        this._currentPyramid$.next(pyramid);
+        await pyramid.start();
+        if (i == this.doublePyramids.length - 1) {
+          resolve(true);
+        }
+        await this.restTime.startTimer();
       }
-    this.workoutRestTime = workoutRestTime;
-    this.doublePyramidRestTime = doublePyramidRestTime;
+    })
   }
 
 }
