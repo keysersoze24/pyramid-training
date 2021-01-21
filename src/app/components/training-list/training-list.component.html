@@ -1,3 +1,28 @@
-<div *ngFor="let training of (trainingService.getAllTrainings() | async)">
-  {{ training.name }}
+<div id="training-list">
+
+  <div *ngFor="let training of (trainingService.getAllTrainings() | async)">
+    <div class="row">
+      <div class="col-8" (click)="editTraining(training)">
+        <h3> {{ training.name }} </h3>
+      </div>
+      <div class="col-4 d-flex justify-content-between">
+        <button mat-icon-button (click)="startTraining(training)" color="primary">
+          <mat-icon>
+            play_arrow
+          </mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteTraining(training)" color="accent">
+          <mat-icon>
+            delete_forever
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <mat-divider></mat-divider>
+      </div>
+    </div>
+  </div>
+
 </div>

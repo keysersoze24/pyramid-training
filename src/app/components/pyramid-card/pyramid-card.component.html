@@ -1,1 +1,48 @@
-<p>pyramid-card works!</p>
+<form [formGroup]="formGroup">
+
+  <div class="row">
+
+    <div class="col-4 d-flex flex-column align-items-start">
+
+      <mat-form-field class="medium-input">
+        <mat-label>Min reps</mat-label>
+        <input matInput formControlName="apexPyramid">
+        <mat-error *ngIf="formValidator?.apexPyramid?.errors">
+          Error
+        </mat-error>
+      </mat-form-field>
+
+      <img src="assets/pyramid.png" height="40">
+
+      <mat-form-field class="medium-input">
+        <mat-label>Max reps</mat-label>
+        <input matInput formControlName="basePyramid">
+        <mat-error *ngIf="formValidator?.basePyramid?.errors">
+          Error
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+
+    <div class="col-4 d-flex align-items-center">
+      <mat-checkbox formControlName="reverse">Reverse</mat-checkbox>
+    </div>
+
+
+
+    <div class="col-4 d-flex align-items-center justify-content-end">
+      <mat-form-field class="small-input">
+        <mat-label>Rest sec</mat-label>
+        <input matInput class="small-input" formControlName="restTime">
+        <mat-error *ngIf="formValidator?.restTime?.errors?.min">
+          Must be greater than zero
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+  </div>
+
+
+  <app-confirm-or-deny-buttons (valueSelected)="onButtonValueSelected($event)"></app-confirm-or-deny-buttons>
+
+</form>

@@ -1,16 +1,16 @@
 import { BehaviorSubject, Observable } from "rxjs";
 import { share } from "rxjs/operators";
-import { DoublePyramid } from "./double-pyramid";
+import { Pyramid } from "./pyramid";
 import { RestTime } from "./rest-time";
 
 
 export class Workout {
 
-  doublePyramids: DoublePyramid [] = [];
+  pyramids: Pyramid [] = [];
   restTime: RestTime;
-  private _currentPyramid$: BehaviorSubject<DoublePyramid> = new BehaviorSubject(null);
+  private _currentPyramid$: BehaviorSubject<Pyramid> = new BehaviorSubject(null);
 
-  getCurrentPyramid(): Observable<DoublePyramid> {
+  getCurrentPyramid(): Observable<Pyramid> {
     return this._currentPyramid$.asObservable().pipe(share())
   }
 
@@ -18,11 +18,11 @@ export class Workout {
 
   async start(): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
-      for (let i = 0; i < this.doublePyramids.length; i++) {
-        const pyramid = this.doublePyramids[i];
+      for (let i = 0; i < this.pyramids.length; i++) {
+        const pyramid = this.pyramids[i];
         this._currentPyramid$.next(pyramid);
         await pyramid.start();
-        if (i == this.doublePyramids.length - 1) {
+        if (i == this.pyramids.length - 1) {
           resolve(true);
         }
         await this.restTime.startTimer();

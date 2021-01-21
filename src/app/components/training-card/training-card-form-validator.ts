@@ -16,7 +16,7 @@ export class TrainingCardFormValidator {
     this._formGroup = fb.group({
       trainingName: [training?.name, [Validators.required]],
       preWorkoutRestTime: [training?.preWorkout?.restTime?.secondsSet],
-      workoutReps: [training?.workout?.doublePyramids?.length, [Validators.min(1)]],
+      workoutReps: [training?.workout?.pyramids?.length, [Validators.min(1)]],
       workoutRestTime: [training?.workout?.restTime?.secondsSet],
       postWorkoutRestTime: [training?.postWorkout?.restTime?.secondsSet]
     })

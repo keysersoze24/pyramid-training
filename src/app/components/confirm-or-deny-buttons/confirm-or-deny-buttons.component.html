@@ -1,8 +1,12 @@
+<h3 *ngIf="data?.title?.length" class="text-center">
+  {{ data.title }}
+</h3>
+
 <div class="row">
   <div class="col-6 d-flex justify-content-center">
-    <button mat-button color="warn" (click)="valueSelected.emit(false)">Annulla</button>
+    <button mat-button color="warn" (click)="deny()">Cancel</button>
   </div>
   <div class="col-6 d-flex justify-content-center">
-    <button mat-button color="primary" (click)="valueSelected.emit(true)">Conferma</button>
+    <button mat-button color="primary" (click)="confirm()">Confirm</button>
   </div>
 </div>

@@ -10,12 +10,12 @@ export enum RoutesPathEnum {
   TrainingExecution = 'trainingexecution'
 }
 
-export enum DoublePyramidStepStatusEnum {
-  Done = 1
-}
-
 export enum TrainingStatusEnum {
   PreWorkout = 1,
   Workout = 2,
   PostWorkout = 3
+}
+
+export enum LocalStorageKeyEnum {
+  Trainings = 'adm_trainings'
 }

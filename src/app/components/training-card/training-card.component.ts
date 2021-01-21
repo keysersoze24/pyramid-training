@@ -2,14 +2,22 @@ import { Overlay } from '@angular/cdk/overlay';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { PostWorkout } from 'src/app/models/post-workout';
+import { PreWorkout } from 'src/app/models/pre-workout';
+import { RestTime } from 'src/app/models/rest-time';
 import { Training } from 'src/app/models/training';
+import { Workout } from 'src/app/models/workout';
+import { TrainingService } from 'src/app/services/training.service';
+import { RoutesPathEnum } from 'src/app/shared/constants';
 import { PyramidCardComponent } from '../pyramid-card/pyramid-card.component';
 import { TrainingCardFormValidator } from './training-card-form-validator';
+import * as lodash from 'lodash';
 
 @Component({
   selector: 'app-training-card',
   templateUrl: './training-card.component.html',
-  styleUrls: ['./training-card.component.scss']
+  styleUrls: ['./training-card.component.scss'],
 })
 export class TrainingCardComponent implements OnInit {
   training = new Training();
@@ -17,33 +25,63 @@ export class TrainingCardComponent implements OnInit {
   formGroup: FormGroup;
   formValidator: TrainingCardFormValidator;
 
-  constructor(public dialog: MatDialog, private overlay: Overlay, private fb: FormBuilder) {
+  constructor(
+    public dialog: MatDialog,
+    private overlay: Overlay,
+    private fb: FormBuilder,
+    private trainingService: TrainingService,
+    private router: Router
+  ) {
+    const trainingToEdit: Training = this.router.getCurrentNavigation()?.extras?.state?.training;
+    if (trainingToEdit?.id) {
+      this.training = trainingToEdit;
+    }
     this.formValidator = new TrainingCardFormValidator(this.fb, this.training);
     this.formGroup = this.formValidator.formGroup;
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openPyramidDialog() {
     const dialogRef = this.dialog.open(PyramidCardComponent, {
       disableClose: true,
       scrollStrategy: this.overlay.scrollStrategies.noop(),
-      data: this.training.workout.doublePyramids[0]
-    })
+      data: this.training.workout.pyramids[0],
+      width: '100vw',
+    });
+    dialogRef.afterClosed().subscribe((newPyramid) => {
+      if (newPyramid) {
+        const workoutReps = parseInt(this.formValidator.workoutReps.value);
+        this.training.workout.pyramids.fill(newPyramid, 0, workoutReps);
+      }
+    });
   }
 
-  saveTraining() {  }
-
-
-
-
-  onValueSelected(valueSelected: boolean) {
-    if (valueSelected) {
-
+  saveTraining() {
+    const firstPyramid = this.training?.workout?.pyramids[0];
+    //
+    this.training.name = this.formValidator?.trainingName?.value;
+    const preWorkoutRestTimeSeconds = parseInt(
+      this.formValidator?.preWorkoutRestTime.value
+    );
+    this.training.preWorkout = new PreWorkout(
+      new RestTime(preWorkoutRestTimeSeconds)
+    );
+    const postWorkoutRestTimeSecons = parseInt(
+      this.formValidator?.postWorkoutRestTime.value
+    );
+    this.training.postWorkout = new PostWorkout(
+      new RestTime(postWorkoutRestTimeSecons)
+    );
+    const workoutRestTimeSeconds = parseInt(
+      this.formValidator.workoutRestTime?.value
+    );
+    this.training.workout = new Workout(new RestTime(workoutRestTimeSeconds));
+    const workoutReps = parseInt(this.formValidator?.workoutReps?.value);
+    for (let i = 0; i < workoutReps; i++) {
+      this.training.workout.pyramids.push(firstPyramid);
     }
-    else {
-
-    }
+    this.trainingService.addTraining(this.training);
+    this.router.navigate([RoutesPathEnum.Home]);
   }
 }
