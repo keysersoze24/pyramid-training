@@ -13,6 +13,7 @@ import { RoutesPathEnum } from 'src/app/shared/constants';
 import { PyramidCardComponent } from '../pyramid-card/pyramid-card.component';
 import { TrainingCardFormValidator } from './training-card-form-validator';
 import * as lodash from 'lodash';
+import { Pyramid } from 'src/app/models/pyramid';
 
 @Component({
   selector: 'app-training-card',
@@ -20,7 +21,7 @@ import * as lodash from 'lodash';
   styleUrls: ['./training-card.component.scss'],
 })
 export class TrainingCardComponent implements OnInit {
-  training = new Training();
+  training: Training;
 
   formGroup: FormGroup;
   formValidator: TrainingCardFormValidator;
@@ -36,6 +37,9 @@ export class TrainingCardComponent implements OnInit {
     if (trainingToEdit?.id) {
       this.training = trainingToEdit;
     }
+    else {
+      this.training = new Training();
+    }
     this.formValidator = new TrainingCardFormValidator(this.fb, this.training);
     this.formGroup = this.formValidator.formGroup;
   }
@@ -49,10 +53,9 @@ export class TrainingCardComponent implements OnInit {
       data: this.training.workout.pyramids[0],
       width: '100vw',
     });
-    dialogRef.afterClosed().subscribe((newPyramid) => {
-      if (newPyramid) {
-        const workoutReps = parseInt(this.formValidator.workoutReps.value);
-        this.training.workout.pyramids.fill(newPyramid, 0, workoutReps);
+    dialogRef.afterClosed().subscribe((result: Pyramid) => {
+      if (result?.basePyramid && result?.apexPyramid) {
+        this.training.workout.pyramids = [result];
       }
     });
   }

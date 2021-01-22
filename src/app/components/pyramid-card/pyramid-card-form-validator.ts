@@ -1,4 +1,4 @@
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from "@angular/forms";
 import { Pyramid } from "src/app/models/pyramid";
 
 export class PyramidCardFormValidator {
@@ -12,11 +12,22 @@ export class PyramidCardFormValidator {
 
   constructor(fb: FormBuilder, pyramid: Pyramid) {
     this._formGroup = fb.group({
-      basePyramid: [pyramid?.basePyramid],
-      apexPyramid: [pyramid?.apexPyramid],
-      restTime: [pyramid?.restTime?.secondsSet, [Validators.min(1)]],
-      reverse: [pyramid?.reverse]
+      basePyramid: [pyramid?.basePyramid, [Validators.required, Validators.min(1)]],
+      apexPyramid: [pyramid?.apexPyramid, [Validators.required, Validators.min(1)]],
+      restTime: [pyramid?.restTime?.secondsSet, [Validators.required, Validators.min(1)]],
+      reverse: [new Boolean(pyramid?.reverse).valueOf()]
     })
+
+    this.basePyramid.setValidators(this.greaterThan('apexPyramid'));
+  }
+
+  private greaterThan(field: string): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+      const group = control.parent;
+      const fieldToCompare = group.get(field);
+      const isLessThan = Number(fieldToCompare.value) >= Number(control.value);
+      return isLessThan ? {'lessOrEqualThan': {value: control.value}} : null;
+    }
   }
 
 }

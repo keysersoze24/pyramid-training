@@ -20,7 +20,7 @@ export class TrainingListComponent implements OnInit {
   }
 
   async startTraining(training: Training) {
-    const trainingFinish = await training.start();
+    this.trainingService.startTraining(training);
   }
 
   editTraining(training: Training) {

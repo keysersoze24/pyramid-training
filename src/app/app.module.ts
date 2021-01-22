@@ -15,6 +15,7 @@ import { DividerComponent } from './components/divider/divider.component';
 import { PyramidCardComponent } from './components/pyramid-card/pyramid-card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { ConfigComponent } from './components/config/config.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
     ConfirmOrDenyButtonsComponent,
     ToolbarComponent,
     DividerComponent,
-    PyramidCardComponent
+    PyramidCardComponent,
+    ConfigComponent
   ],
   imports: [
     BrowserModule,

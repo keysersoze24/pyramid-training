@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TrainingService } from 'src/app/services/training.service';
+import { TimerModesEnum } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-training-execution',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TrainingExecutionComponent implements OnInit {
 
-  constructor() { }
+  TimerModesEnum = TimerModesEnum;
+
+  constructor(public trainingService: TrainingService) { }
 
   ngOnInit(): void {
   }

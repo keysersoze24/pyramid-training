@@ -2,13 +2,16 @@
 
   <div class="row">
 
-    <div class="col-4 d-flex flex-column align-items-start">
+    <div class="col-6 d-flex flex-column align-items-start justify-content-between">
 
       <mat-form-field class="medium-input">
         <mat-label>Min reps</mat-label>
-        <input matInput formControlName="apexPyramid">
-        <mat-error *ngIf="formValidator?.apexPyramid?.errors">
-          Error
+        <input matInput formControlName="apexPyramid" [(ngModel)]="pyramid.apexPyramid">
+        <mat-error *ngIf="formValidator?.apexPyramid?.errors?.required">
+          Mandatory
+        </mat-error>
+        <mat-error *ngIf="formValidator?.apexPyramid?.errors?.min">
+          Must be greater than zero
         </mat-error>
       </mat-form-field>
 
@@ -16,33 +19,42 @@
 
       <mat-form-field class="medium-input">
         <mat-label>Max reps</mat-label>
-        <input matInput formControlName="basePyramid">
-        <mat-error *ngIf="formValidator?.basePyramid?.errors">
-          Error
+        <input matInput formControlName="basePyramid" [(ngModel)]="pyramid.basePyramid">
+        <mat-error *ngIf="formValidator?.basePyramid?.errors?.required">
+          Mandatory
+        </mat-error>
+        <mat-error *ngIf="formValidator?.basePyramid?.errors?.min">
+          Must be greater than zero
+        </mat-error>
+        <mat-error *ngIf="formValidator?.basePyramid?.errors?.lessOrEqualThan">
+          Less or equal than apex
         </mat-error>
       </mat-form-field>
 
     </div>
 
-    <div class="col-4 d-flex align-items-center">
-      <mat-checkbox formControlName="reverse">Reverse</mat-checkbox>
-    </div>
+    <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+      <mat-checkbox formControlName="reverse" [(ngModel)]="pyramid.reverse">Start from base</mat-checkbox>
 
-
-
-    <div class="col-4 d-flex align-items-center justify-content-end">
       <mat-form-field class="small-input">
         <mat-label>Rest sec</mat-label>
-        <input matInput class="small-input" formControlName="restTime">
+        <input matInput class="small-input" formControlName="restTime" [(ngModel)]="pyramid?.restTime.secondsSet">
         <mat-error *ngIf="formValidator?.restTime?.errors?.min">
           Must be greater than zero
         </mat-error>
+        <mat-error *ngIf="formValidator?.restTime?.errors?.required">
+          Mandatory
+        </mat-error>
       </mat-form-field>
     </div>
+
 
   </div>
 
 
+  <div id="confirm-buttons">
+
+  </div>
   <app-confirm-or-deny-buttons (valueSelected)="onButtonValueSelected($event)"></app-confirm-or-deny-buttons>
 
 </form>

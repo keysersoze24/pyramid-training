@@ -1,0 +1,13 @@
+<h2 class="text-center">Settings</h2>
+
+<div class="row d-flex align-items-center">
+  <div class="col-6">
+    Timer mode:
+  </div>
+  <div class="col-6">
+    <mat-checkbox [value]="configService.config?.timerMode == TimerModesEnum.Countdown" (change)="onTimerModeChange($event)">
+      Countdown
+    </mat-checkbox>
+  </div>
+
+</div>

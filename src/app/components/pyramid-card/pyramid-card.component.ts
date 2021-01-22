@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Pyramid } from 'src/app/models/pyramid';
-import { RestTime } from 'src/app/models/rest-time';
 import * as lodash from 'lodash';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PyramidCardFormValidator } from './pyramid-card-form-validator';
@@ -13,7 +12,7 @@ import { PyramidCardFormValidator } from './pyramid-card-form-validator';
 })
 export class PyramidCardComponent implements OnInit {
 
-  pyramid: Pyramid = new Pyramid(5, 1, new RestTime(2), true);
+  pyramid: Pyramid;
   formGroup: FormGroup;
   formValidator: PyramidCardFormValidator;
 
@@ -29,13 +28,9 @@ export class PyramidCardComponent implements OnInit {
 
   onButtonValueSelected(pyramidConfirmed: boolean) {
     if (pyramidConfirmed) {
-      this.pyramid.apexPyramid = parseInt(this.formValidator?.apexPyramid?.value);
-      this.pyramid.basePyramid = parseInt(this.formValidator?.basePyramid?.value);
-      this.pyramid.restTime = new RestTime(parseInt(this.formValidator?.restTime.value));
-      this.pyramid.reverse = new Boolean(this.formValidator?.reverse?.value).valueOf();
       this.dialogRef.close(this.pyramid);
     } else {
-      this.dialogRef.close(null);
+      this.dialogRef.close();
     }
   }
 

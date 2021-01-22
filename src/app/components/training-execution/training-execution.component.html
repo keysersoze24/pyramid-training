@@ -1,1 +1,1 @@
-<p>training-execution works!</p>
+<app-timer [mode]="TimerModesEnum.Increment" [restTime]="(trainingService.getTrainingSelected() | async).training?.preWorkout?.restTime"></app-timer>

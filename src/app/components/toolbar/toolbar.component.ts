@@ -1,7 +1,9 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { RoutesPathEnum } from 'src/app/shared/constants';
+import { ConfigComponent } from '../config/config.component';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +15,7 @@ export class ToolbarComponent implements OnInit {
   RoutesPathEnum = RoutesPathEnum;
   currentPath: string;
 
-  constructor(private location: Location, private router: Router) { }
+  constructor(private location: Location, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
 
@@ -25,6 +27,10 @@ export class ToolbarComponent implements OnInit {
 
   navigateBack() {
     this.location.back();
+  }
+
+  openConfig() {
+    this.dialog.open(ConfigComponent);
   }
 
 }

@@ -1,19 +1,15 @@
-
-import { BehaviorSubject } from "rxjs";
-import { share } from "rxjs/operators";
-import { TrainingStatusEnum } from "../shared/constants";
 import { Utilities } from "../shared/utilities";
 import { Pyramid } from "./pyramid";
 import { PostWorkout } from "./post-workout";
 import { PreWorkout } from "./pre-workout";
 import { RestTime } from "./rest-time";
 import { Workout } from "./workout";
+import { TrainingStatusEnum } from "../shared/constants";
 
 export class Training {
 
   private _id: string;
   get id(): string { return this._id };
-  private _trainingStatus$: BehaviorSubject<TrainingStatusEnum> = new BehaviorSubject(null);
 
   name: string;
   preWorkout: PreWorkout;
@@ -34,22 +30,6 @@ export class Training {
     }
   }
 
-  private updateStatus(trainingStatus: TrainingStatusEnum) {
-    this._trainingStatus$.next(trainingStatus);
-  }
-
-  getStatus() {
-    return this._trainingStatus$.asObservable().pipe(share())
-  }
-
-  async start() {
-    this.updateStatus(TrainingStatusEnum.PreWorkout);
-    await this.preWorkout.start();
-    this.updateStatus(TrainingStatusEnum.Workout);
-    await this.workout.start();
-    this.updateStatus(TrainingStatusEnum.PostWorkout);
-    await this.postWorkout.start();
-  }
 
   private defaultTraining() {
     this.name = 'Default';
@@ -59,7 +39,7 @@ export class Training {
     const workoutRestTime = new RestTime(120);
     const workout = new Workout(workoutRestTime);
     const pyramidRestTime = new RestTime(2);
-    const pyramid = new Pyramid(1, 5, pyramidRestTime, true);
+    const pyramid = new Pyramid(5, 1, pyramidRestTime, true);
     workout.pyramids.push(pyramid);
     this.workout = workout;
     const postWorkoutRestTime = new RestTime(60);
@@ -67,5 +47,9 @@ export class Training {
     this.postWorkout = postWorkout;
   }
 
+}
 
+export interface TrainingSelected {
+  training: Training;
+  status: TrainingStatusEnum;
 }

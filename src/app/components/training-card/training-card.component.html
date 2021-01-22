@@ -23,8 +23,11 @@
         <mat-form-field class="small-input">
           <mat-label>Rest sec</mat-label>
           <input matInput formControlName="preWorkoutRestTime">
-          <mat-error *ngIf="formValidator.preWorkoutRestTime?.errors">
-            Error
+          <mat-error *ngIf="formValidator.preWorkoutRestTime?.errors?.min">
+            Must be greater than zero
+          </mat-error>
+          <mat-error *ngIf="formValidator.preWorkoutRestTime?.errors?.required">
+            Mandatory
           </mat-error>
         </mat-form-field>
       </div>
@@ -43,6 +46,9 @@
             <mat-error *ngIf="formValidator.workoutReps?.errors?.min">
               Must be greater than zero
             </mat-error>
+            <mat-error *ngIf="formValidator.workoutReps?.errors?.required">
+              Mandatory
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -50,8 +56,11 @@
         <mat-form-field class="small-input">
           <mat-label>Rest sec</mat-label>
           <input matInput formControlName="workoutRestTime">
-          <mat-error *ngIf="formValidator.workoutRestTime?.errors">
-            Error
+          <mat-error *ngIf="formValidator.workoutRestTime?.errors?.min">
+            Must be greater than zero
+          </mat-error>
+          <mat-error *ngIf="formValidator.workoutRestTime?.errors?.required">
+            Mandatory
           </mat-error>
         </mat-form-field>
       </div>
@@ -67,8 +76,11 @@
         <mat-form-field class="small-input">
           <mat-label>Rest sec</mat-label>
           <input matInput formControlName="postWorkoutRestTime">
-          <mat-error *ngIf="formValidator.postWorkoutRestTime?.errors">
-            Error
+          <mat-error *ngIf="formValidator.postWorkoutRestTime?.errors?.min">
+            Must be greater than zero
+          </mat-error>
+          <mat-error *ngIf="formValidator.postWorkoutRestTime?.errors?.required">
+            Mandatory
           </mat-error>
         </mat-form-field>
       </div>
@@ -76,7 +88,7 @@
   </mat-card-content>
 
   <mat-card-actions>
-    <button mat-icon-button color="accent" (click)="saveTraining()">
+    <button mat-icon-button color="accent" (click)="saveTraining()" [disabled]="formGroup.invalid">
       <mat-icon>
         save
       </mat-icon>

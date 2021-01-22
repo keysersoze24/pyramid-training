@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { RestTime } from 'src/app/models/rest-time';
+import { TimerModesEnum } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-timer',
@@ -9,6 +10,9 @@ import { RestTime } from 'src/app/models/rest-time';
 export class TimerComponent implements OnInit {
 
   @Input() restTime: RestTime;
+  @Input() mode: TimerModesEnum;
+
+  TimerModesEnum = TimerModesEnum;
 
   constructor() { }
 

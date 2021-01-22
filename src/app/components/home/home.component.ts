@@ -12,7 +12,6 @@ import { RoutesPathEnum, TrainingStatusEnum } from 'src/app/shared/constants';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  training = new Training();
   TrainingStatusEnum = TrainingStatusEnum;
 
   constructor(public trainigService: TrainingService, private router: Router) { }
