@@ -4,7 +4,6 @@ import { PostWorkout } from "./post-workout";
 import { PreWorkout } from "./pre-workout";
 import { RestTime } from "./rest-time";
 import { Workout } from "./workout";
-import { TrainingStatusEnum } from "../shared/constants";
 
 export class Training {
 
@@ -33,23 +32,18 @@ export class Training {
 
   private defaultTraining() {
     this.name = 'Default';
-    const preWorkoutRestTime = new RestTime(60);
+    const preWorkoutRestTime = new RestTime(10);
     const preWorkout = new PreWorkout(preWorkoutRestTime);
     this.preWorkout = preWorkout;
-    const workoutRestTime = new RestTime(120);
+    const workoutRestTime = new RestTime(20);
     const workout = new Workout(workoutRestTime);
     const pyramidRestTime = new RestTime(2);
     const pyramid = new Pyramid(5, 1, pyramidRestTime, true);
     workout.pyramids.push(pyramid);
     this.workout = workout;
-    const postWorkoutRestTime = new RestTime(60);
+    const postWorkoutRestTime = new RestTime(10);
     const postWorkout = new PostWorkout(postWorkoutRestTime);
     this.postWorkout = postWorkout;
   }
 
-}
-
-export interface TrainingSelected {
-  training: Training;
-  status: TrainingStatusEnum;
 }

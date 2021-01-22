@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { Training, TrainingSelected } from '../models/training';
+import { Training } from '../models/training';
+import { TrainingSelected } from '../models/training-selected';
 import { LocalStorageKeyEnum, TrainingStatusEnum } from '../shared/constants';
 import { Utilities } from '../shared/utilities';
 
@@ -10,7 +11,8 @@ import { Utilities } from '../shared/utilities';
 })
 export class TrainingService {
   private _allTrainings$: BehaviorSubject<Training[]> = new BehaviorSubject([]);
-  private _trainingSelected$: BehaviorSubject<TrainingSelected> = new BehaviorSubject({ training: null, status: TrainingStatusEnum.Stop });
+  private _trainingSelected$: BehaviorSubject<TrainingSelected> = new BehaviorSubject(null);
+
 
   constructor() {
     const allTrainings = this.getTrainingsFromLocalStorage();
@@ -44,13 +46,13 @@ export class TrainingService {
   updateTrainingSelected(status: TrainingStatusEnum, trainig?: Training, ): void {
     let trainingSelected: TrainingSelected;
     if (trainig) {
-      trainingSelected = { training: trainig, status: status };
+      trainingSelected = new TrainingSelected(status, trainig);
     }
     else {
-      trainingSelected = { training: this._trainingSelected$.getValue()?.training, status };
+      const existingTraining = this._trainingSelected$.getValue()?.training;
+      trainingSelected = new TrainingSelected(status, existingTraining);
     }
     this._trainingSelected$.next(trainingSelected);
-
   }
 
   getTrainingSelected(): Observable<TrainingSelected> {
@@ -66,18 +68,18 @@ export class TrainingService {
     }
     return new Promise(async (resolve, reject) => {
       this.updateTrainingSelected(TrainingStatusEnum.PreWorkout);
-      await this._trainingSelected$.getValue()?.training?.preWorkout.start();
+      await training.preWorkout.start();
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
-      await this._trainingSelected$.getValue()?.training?.workout.start();
+      await training.workout.start();
       this.updateTrainingSelected(TrainingStatusEnum.PostWorkout);
-      await this._trainingSelected$.getValue()?.training?.postWorkout.start();
-      this.updateTrainingSelected(null);
+      await training.postWorkout.start();;
+      this.updateTrainingSelected(TrainingStatusEnum.Stop);
       resolve(true);
     });
   }
 
   stopTraining() {
-    this.updateTrainingSelected(TrainingStatusEnum.Stop, null);
+    this.updateTrainingSelected(TrainingStatusEnum.Stop);
   }
 
 

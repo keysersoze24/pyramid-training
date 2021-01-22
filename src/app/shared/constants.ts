@@ -11,17 +11,12 @@ export enum RoutesPathEnum {
 }
 
 export enum TrainingStatusEnum {
-  Stop = 1,
-  PreWorkout = 2,
-  Workout = 3,
-  PostWorkout = 4,
+  Stop = 'Stop',
+  PreWorkout = 'Pre workout',
+  Workout = 'Workout',
+  PostWorkout = 'Post workout',
 }
 
 export enum LocalStorageKeyEnum {
   Trainings = 'adm_trainings'
-}
-
-export enum TimerModesEnum {
-  Countdown = 1,
-  Increment = 2
 }

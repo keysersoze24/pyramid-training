@@ -17,6 +17,9 @@ const routes: Routes = [
     path: RoutesPathEnum.TrainingExecution, component: TrainingExecutionComponent
   },
   {
+    path: '', redirectTo: RoutesPathEnum.Home, pathMatch: 'full'
+  },
+  {
     path:'**', component:HomeComponent
   }
 

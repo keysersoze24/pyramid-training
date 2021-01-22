@@ -28,7 +28,7 @@ export class PyramidCardComponent implements OnInit {
 
   onButtonValueSelected(pyramidConfirmed: boolean) {
     if (pyramidConfirmed) {
-      this.dialogRef.close(this.pyramid);
+      this.dialogRef.close(<Pyramid>this.pyramid);
     } else {
       this.dialogRef.close();
     }

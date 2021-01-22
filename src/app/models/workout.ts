@@ -1,20 +1,20 @@
 import { BehaviorSubject, Observable } from "rxjs";
 import { share } from "rxjs/operators";
+import { BaseRest } from "./base-rest";
 import { Pyramid } from "./pyramid";
 import { RestTime } from "./rest-time";
 
 
-export class Workout {
+export class Workout extends BaseRest {
 
   pyramids: Pyramid [] = [];
-  restTime: RestTime;
   private _currentPyramid$: BehaviorSubject<Pyramid> = new BehaviorSubject(null);
 
   getCurrentPyramid(): Observable<Pyramid> {
     return this._currentPyramid$.asObservable().pipe(share())
   }
 
-  constructor(restTime: RestTime) { this.restTime = restTime };
+  super() { };
 
   async start(): Promise<boolean> {
     return new Promise(async (resolve, reject) => {

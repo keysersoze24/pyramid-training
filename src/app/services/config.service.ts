@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { AppConfig } from '../models/app-config';
-import { TimerModesEnum } from '../shared/constants';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConfigService {
 
-  public config: AppConfig = new AppConfig();
+  public config: AppConfig;
 
   constructor() {
-    this.config.timerMode = TimerModesEnum.Countdown;
+    this.config = new AppConfig();
+    this.config.countdownTimer = true;
   }
 }

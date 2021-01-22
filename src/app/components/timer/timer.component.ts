@@ -1,22 +1,23 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
 import { RestTime } from 'src/app/models/rest-time';
-import { TimerModesEnum } from 'src/app/shared/constants';
+import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss']
 })
-export class TimerComponent implements OnInit {
+export class TimerComponent implements OnChanges {
 
   @Input() restTime: RestTime;
-  @Input() mode: TimerModesEnum;
+  @Input() countdown: boolean;
 
-  TimerModesEnum = TimerModesEnum;
+  constructor(public trainingService: TrainingService, private cd: ChangeDetectorRef) { }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.cd.detectChanges();
   }
+
+
 
 }

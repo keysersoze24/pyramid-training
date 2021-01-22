@@ -1,1 +1,10 @@
-<app-timer [mode]="TimerModesEnum.Increment" [restTime]="(trainingService.getTrainingSelected() | async).training?.preWorkout?.restTime"></app-timer>
+<h2 class="text-center">
+  {{ (trainingService.getTrainingSelected() | async)?.status }}
+</h2>
+
+<app-timer
+  *ngIf="(trainingService.getTrainingSelected() | async).status != TrainingStatusEnum.Stop"
+  [countdown]="configService?.config?.countdownTimer"
+  [restTime]="(trainingService.getTrainingSelected() | async)?.restTime">
+</app-timer>
+

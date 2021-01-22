@@ -1,4 +1,4 @@
-<div *ngIf="!(trainigService.getTrainingSelected() | async).training">
+<div *ngIf="!(trainigService.getTrainingSelected() | async)?.training">
 
   <div *ngIf="(trainigService.getAllTrainings() | async)?.length">
     <app-training-list></app-training-list>
@@ -17,7 +17,7 @@
 
 </div>
 
-<div *ngIf="(trainigService.getTrainingSelected() | async).training">
+<div *ngIf="(trainigService.getTrainingSelected() | async)?.training">
   <app-training-execution></app-training-execution>
 </div>
 

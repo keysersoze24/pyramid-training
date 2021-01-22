@@ -5,7 +5,7 @@
     Timer mode:
   </div>
   <div class="col-6">
-    <mat-checkbox [value]="configService.config?.timerMode == TimerModesEnum.Countdown" (change)="onTimerModeChange($event)">
+    <mat-checkbox [(ngModel)]="configService.config.countdownTimer">
       Countdown
     </mat-checkbox>
   </div>

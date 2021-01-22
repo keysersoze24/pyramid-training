@@ -10,6 +10,7 @@ export abstract class BaseRest {
   async start(): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
       await this.restTime.startTimer();
+      resolve(true);
     })
   }
 }

@@ -18,7 +18,6 @@ export class ToolbarComponent implements OnInit {
   constructor(private location: Location, private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
-
     this.location.onUrlChange(url => {
       const slashIndex = url.indexOf('/');
       this.currentPath = url.substring(slashIndex + 1);
