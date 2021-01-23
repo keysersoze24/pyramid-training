@@ -55,7 +55,7 @@ export class Pyramid {
     return new Promise(async (resolve, reject) => {
       for (let i = 0; i < this._doublePyramid.length; i++) {
         this._repsToDo$.next(this._doublePyramid[i]);
-        await this.restTime.startTimer();
+        await this.restTime._startTimer();
         if (i == this._doublePyramid.length - 1) {
           resolve(true);
         }

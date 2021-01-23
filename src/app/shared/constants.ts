@@ -14,3 +14,11 @@ export enum TrainingStatusEnum {
 export enum LocalStorageKeyEnum {
   Trainings = 'adm_trainings'
 }
+
+export enum TimerStatusEnum {
+  Running = 'running',
+  Paused = 'paused',
+  Stopped = 'stopped'
+}
+
+export const MILLISEC_SECOND = 1000;

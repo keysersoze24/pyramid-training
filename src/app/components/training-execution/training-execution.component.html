@@ -3,7 +3,7 @@
 </h2>
 
 <app-timer
-  *ngIf="(trainingService.getTrainingSelected() | async).status != TrainingStatusEnum.Stop"
+  *ngIf="((trainingService.getTrainingSelected() | async).restTime.getTimerStatus() | async) != TimerStatuEnum.Stopped"
   [countdown]="configService?.config?.countdownTimer"
   [restTime]="(trainingService.getTrainingSelected() | async)?.restTime">
 </app-timer>

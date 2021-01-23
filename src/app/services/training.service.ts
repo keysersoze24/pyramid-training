@@ -10,9 +10,10 @@ import { Utilities } from '../shared/utilities';
   providedIn: 'root',
 })
 export class TrainingService {
+  //#region private props
   private _allTrainings$: BehaviorSubject<Training[]> = new BehaviorSubject([]);
   private _trainingSelected$: BehaviorSubject<TrainingSelected> = new BehaviorSubject(null);
-
+  //#endregion
 
   constructor() {
     const allTrainings = this.getTrainingsFromLocalStorage();
@@ -61,24 +62,12 @@ export class TrainingService {
   //#endregion
 
 
-  //#region methods
-  async startTraining(training: Training) {
+  //#region public methods
+  async startTraining(training: Training): Promise<boolean> {
     if (!this._trainingSelected$.getValue()?.training?.id) {
       this.updateTrainingSelected(TrainingStatusEnum.Stop, training);
     }
-    training.preWorkout.restTime.startTimer()
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    .finally(() => {
-      console.log('done')
-    })
-
-    /*
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       this.updateTrainingSelected(TrainingStatusEnum.PreWorkout);
       await training.preWorkout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
@@ -88,14 +77,10 @@ export class TrainingService {
       this.updateTrainingSelected(TrainingStatusEnum.Stop);
       resolve(true);
     });
-    */
   }
+  //#endregion
 
-  stopTraining() {
-    this.updateTrainingSelected(TrainingStatusEnum.Stop);
-  }
-
-
+  //#region private methods
   private getTrainingsFromLocalStorage(): Training[] {
     const rawTrainings: Training[] = <Training[]>(
       Utilities.getLocalStorageItem(LocalStorageKeyEnum.Trainings)

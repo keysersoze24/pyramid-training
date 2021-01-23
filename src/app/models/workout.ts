@@ -26,7 +26,7 @@ export class Workout {
         if (i == this.pyramids.length - 1) {
           resolve(true);
         }
-        await this.restTime.startTimer();
+        await this.restTime._startTimer();
       }
     })
   }

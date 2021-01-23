@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from 'src/app/services/config.service';
 import { TrainingService } from 'src/app/services/training.service';
-import { TrainingStatusEnum } from 'src/app/shared/constants';
+import { TimerStatusEnum } from 'src/app/shared/constants';
 
 @Component({
   selector: 'app-training-execution',
@@ -10,7 +10,7 @@ import { TrainingStatusEnum } from 'src/app/shared/constants';
 })
 export class TrainingExecutionComponent {
 
-  TrainingStatusEnum = TrainingStatusEnum;
+  TimerStatuEnum = TimerStatusEnum;
 
   constructor(public trainingService: TrainingService, public configService: ConfigService) { }
 
