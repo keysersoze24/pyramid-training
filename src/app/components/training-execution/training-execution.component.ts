@@ -8,17 +8,10 @@ import { TrainingStatusEnum } from 'src/app/shared/constants';
   templateUrl: './training-execution.component.html',
   styleUrls: ['./training-execution.component.scss']
 })
-export class TrainingExecutionComponent implements OnInit {
+export class TrainingExecutionComponent {
 
   TrainingStatusEnum = TrainingStatusEnum;
 
-  constructor(public trainingService: TrainingService, public configService: ConfigService) {
-    this.trainingService.getTrainingSelected().subscribe(res => {
-      console.log(res);
-    })
-  }
-
-  ngOnInit(): void {
-  }
+  constructor(public trainingService: TrainingService, public configService: ConfigService) { }
 
 }

@@ -62,20 +62,33 @@ export class TrainingService {
 
 
   //#region methods
-  async startTraining(training: Training): Promise<boolean> {
+  async startTraining(training: Training) {
     if (!this._trainingSelected$.getValue()?.training?.id) {
       this.updateTrainingSelected(TrainingStatusEnum.Stop, training);
     }
+    training.preWorkout.restTime.startTimer()
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+    .finally(() => {
+      console.log('done')
+    })
+
+    /*
     return new Promise(async (resolve, reject) => {
       this.updateTrainingSelected(TrainingStatusEnum.PreWorkout);
-      await training.preWorkout.start();
+      await training.preWorkout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
-      await training.workout.start();
+      await training.workout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.PostWorkout);
-      await training.postWorkout.start();;
+      await training.postWorkout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.Stop);
       resolve(true);
     });
+    */
   }
 
   stopTraining() {

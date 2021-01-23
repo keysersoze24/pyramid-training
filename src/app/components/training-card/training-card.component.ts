@@ -67,19 +67,15 @@ export class TrainingCardComponent implements OnInit {
     const preWorkoutRestTimeSeconds = parseInt(
       this.formValidator?.preWorkoutRestTime.value
     );
-    this.training.preWorkout = new PreWorkout(
-      new RestTime(preWorkoutRestTimeSeconds)
-    );
+    this.training.preWorkout = new PreWorkout(preWorkoutRestTimeSeconds);
     const postWorkoutRestTimeSecons = parseInt(
       this.formValidator?.postWorkoutRestTime.value
     );
-    this.training.postWorkout = new PostWorkout(
-      new RestTime(postWorkoutRestTimeSecons)
-    );
+    this.training.postWorkout = new PostWorkout(postWorkoutRestTimeSecons);
     const workoutRestTimeSeconds = parseInt(
       this.formValidator.workoutRestTime?.value
     );
-    this.training.workout = new Workout(new RestTime(workoutRestTimeSeconds));
+    this.training.workout = new Workout(workoutRestTimeSeconds);
     const workoutReps = parseInt(this.formValidator?.workoutReps?.value);
     for (let i = 0; i < workoutReps; i++) {
       this.training.workout.pyramids.push(firstPyramid);

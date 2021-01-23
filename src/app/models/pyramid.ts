@@ -34,7 +34,7 @@ export class Pyramid {
   constructor(
     basePyramid: number,
     apexPyramid: number,
-    restTime: RestTime,
+    secondsRest: number,
     reverse: boolean
   ) {
     if (basePyramid > 0 && apexPyramid > 0) {
@@ -43,7 +43,7 @@ export class Pyramid {
         this.apexPyramid = apexPyramid;
       }
     }
-    this.restTime = restTime;
+    this.restTime = new RestTime(secondsRest);
     this.reverse = reverse;
   }
 
@@ -54,7 +54,6 @@ export class Pyramid {
   async start(): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
       for (let i = 0; i < this._doublePyramid.length; i++) {
-        // todoandrea tempo tra una ripetizione e l'altra
         this._repsToDo$.next(this._doublePyramid[i]);
         await this.restTime.startTimer();
         if (i == this._doublePyramid.length - 1) {

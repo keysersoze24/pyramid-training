@@ -15,6 +15,7 @@ export class TimerComponent implements OnChanges {
   constructor(public trainingService: TrainingService, private cd: ChangeDetectorRef) { }
 
   ngOnChanges(): void {
+    console.log(this.restTime);
     this.cd.detectChanges();
   }
 

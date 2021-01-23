@@ -20,29 +20,25 @@ export class Training {
     this.defaultTraining();
     if (training) {
       this.name = training.name;
-      this.preWorkout = new PreWorkout(new RestTime(training.preWorkout?.restTime?.secondsSet));
-      this.workout = new Workout(new RestTime(training.workout?.restTime?.secondsSet));
+      this.preWorkout = new PreWorkout(training.preWorkout?.restTime?.secondsSet);
+      this.workout = new Workout(training.workout?.restTime?.secondsSet);
       this.workout.pyramids = training.workout?.pyramids.map(pyramid => {
-        return new Pyramid(pyramid.basePyramid, pyramid.apexPyramid, new RestTime(pyramid.restTime.secondsSet), pyramid.reverse);
+        return new Pyramid(pyramid.basePyramid, pyramid.apexPyramid, pyramid.restTime.secondsSet, pyramid.reverse);
       })
-      this.postWorkout = new PostWorkout(new RestTime(training.postWorkout.restTime?.secondsSet));
+      this.postWorkout = new PostWorkout(training.postWorkout.restTime?.secondsSet);
     }
   }
 
 
   private defaultTraining() {
     this.name = 'Default';
-    const preWorkoutRestTime = new RestTime(10);
-    const preWorkout = new PreWorkout(preWorkoutRestTime);
+    const preWorkout = new PreWorkout(5);
     this.preWorkout = preWorkout;
-    const workoutRestTime = new RestTime(20);
-    const workout = new Workout(workoutRestTime);
-    const pyramidRestTime = new RestTime(2);
-    const pyramid = new Pyramid(5, 1, pyramidRestTime, true);
+    const workout = new Workout(10);
+    const pyramid = new Pyramid(3, 1, 2, true);
     workout.pyramids.push(pyramid);
     this.workout = workout;
-    const postWorkoutRestTime = new RestTime(10);
-    const postWorkout = new PostWorkout(postWorkoutRestTime);
+    const postWorkout = new PostWorkout(5);
     this.postWorkout = postWorkout;
   }
 

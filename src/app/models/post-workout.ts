@@ -1,3 +1,11 @@
-import { BaseRest } from "./base-rest";
+import { RestTime } from "./rest-time";
 
-export class PostWorkout extends BaseRest { }
+export class PostWorkout {
+
+  restTime: RestTime;
+
+  constructor(secondsRest: number) {
+    this.restTime = new RestTime(secondsRest);
+  }
+
+}
