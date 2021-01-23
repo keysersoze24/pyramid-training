@@ -72,7 +72,8 @@ export class TrainingService {
       this.updateTrainingSelected(TrainingStatusEnum.PreWorkout, training);
       await training.preWorkout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
-      await training.workout.restTime.startTimer();
+      await training.workout.start();
+      // await training.workout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.PostWorkout);
       await training.postWorkout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.Finish);

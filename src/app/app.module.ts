@@ -16,6 +16,7 @@ import { PyramidCardComponent } from './components/pyramid-card/pyramid-card.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ConfigComponent } from './components/config/config.component';
+import { PyramidExecutionComponent } from './components/pyramid-execution/pyramid-execution.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ConfigComponent } from './components/config/config.component';
     ToolbarComponent,
     DividerComponent,
     PyramidCardComponent,
-    ConfigComponent
+    ConfigComponent,
+    PyramidExecutionComponent
   ],
   imports: [
     BrowserModule,

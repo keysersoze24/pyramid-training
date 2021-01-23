@@ -1,14 +1,17 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
+import { PyramidStep } from './pyramid-rep';
 import { RestTime } from './rest-time';
 
 export class Pyramid {
+
+  private _pyramidStep: PyramidStep;
+
   basePyramid: number;
   apexPyramid: number;
   reverse: boolean = true;
   restTime: RestTime;
-
-  private _repsToDo$: BehaviorSubject<number> = new BehaviorSubject(0);
+  restTimeReps: RestTime;
 
   private get _doublePyramid(): number[] {
     let result: number[] = [];
@@ -35,6 +38,7 @@ export class Pyramid {
     basePyramid: number,
     apexPyramid: number,
     secondsRest: number,
+    secondsRestReps: number,
     reverse: boolean
   ) {
     if (basePyramid > 0 && apexPyramid > 0) {
@@ -44,17 +48,16 @@ export class Pyramid {
       }
     }
     this.restTime = new RestTime(secondsRest);
+    this.restTimeReps = new RestTime(secondsRestReps);
     this.reverse = reverse;
   }
 
-  getRepsToDo(): Observable<number> {
-    return this._repsToDo$.asObservable().pipe(share());
-  }
 
   async start(): Promise<boolean> {
     return new Promise(async (resolve, reject) => {
       for (let i = 0; i < this._doublePyramid.length; i++) {
-        this._repsToDo$.next(this._doublePyramid[i]);
+        const pyramidStep = new PyramidStep(this.restTimeReps.secondsSet, this._doublePyramid[i]);
+        await pyramidStep.start();
         await this.restTime.startTimer();
         if (i == this._doublePyramid.length - 1) {
           resolve(true);
