@@ -32,13 +32,13 @@ export class Training {
 
   private defaultTraining() {
     this.name = 'Default';
-    const preWorkout = new PreWorkout(5);
+    const preWorkout = new PreWorkout(3);
     this.preWorkout = preWorkout;
-    const workout = new Workout(10);
+    const workout = new Workout(3);
     const pyramid = new Pyramid(3, 1, 2, true);
     workout.pyramids.push(pyramid);
     this.workout = workout;
-    const postWorkout = new PostWorkout(5);
+    const postWorkout = new PostWorkout(3);
     this.postWorkout = postWorkout;
   }
 

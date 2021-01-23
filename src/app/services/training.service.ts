@@ -44,7 +44,7 @@ export class TrainingService {
   //#endregion
 
   //#region training selected
-  updateTrainingSelected(status: TrainingStatusEnum, trainig?: Training, ): void {
+  updateTrainingSelected(status: TrainingStatusEnum, trainig?: Training): void {
     let trainingSelected: TrainingSelected;
     if (trainig) {
       trainingSelected = new TrainingSelected(status, trainig);
@@ -59,22 +59,23 @@ export class TrainingService {
   getTrainingSelected(): Observable<TrainingSelected> {
     return this._trainingSelected$.asObservable().pipe(share());
   }
+
+  getTrainingSelectedSync(): TrainingSelected {
+    return this._trainingSelected$.getValue();
+  }
   //#endregion
 
 
   //#region public methods
   async startTraining(training: Training): Promise<boolean> {
-    if (!this._trainingSelected$.getValue()?.training?.id) {
-      this.updateTrainingSelected(TrainingStatusEnum.Stop, training);
-    }
     return new Promise(async resolve => {
-      this.updateTrainingSelected(TrainingStatusEnum.PreWorkout);
+      this.updateTrainingSelected(TrainingStatusEnum.PreWorkout, training);
       await training.preWorkout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
       await training.workout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.PostWorkout);
       await training.postWorkout.restTime.startTimer();
-      this.updateTrainingSelected(TrainingStatusEnum.Stop);
+      this.updateTrainingSelected(TrainingStatusEnum.Finish);
       resolve(true);
     });
   }

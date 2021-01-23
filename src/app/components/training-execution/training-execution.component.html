@@ -2,9 +2,19 @@
   {{ (trainingService.getTrainingSelected() | async)?.status }}
 </h2>
 
-<app-timer
-  *ngIf="((trainingService.getTrainingSelected() | async).restTime.getTimerStatus() | async) != TimerStatuEnum.Stopped"
-  [countdown]="configService?.config?.countdownTimer"
-  [restTime]="(trainingService.getTrainingSelected() | async)?.restTime">
-</app-timer>
+<div class="row" *ngIf="(trainingService.getTrainingSelected() | async)?.status && (trainingService.getTrainingSelected() | async)?.status != TrainingStatusEnum.Finish">
+  <div class="col-12 d-flex justify-content-center align-items-center">
+    <app-timer
+      [countdown]="configService?.config?.countdownTimer"
+      [restTime]="(trainingService.getTrainingSelected() | async)?.restTime">
+    </app-timer>
+  </div>
+</div>
 
+<div class="row" *ngIf="(trainingService.getTrainingSelected() | async)?.status && (trainingService.getTrainingSelected() | async)?.status != TrainingStatusEnum.Finish">
+  <div class="col-12 d-flex justify-content-center">
+    <button mat-button color="warn" (click)="stopTraining()">
+      Quit
+    </button>
+  </div>
+</div>

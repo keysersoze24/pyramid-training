@@ -6,3 +6,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .small-input { width: 70px; }
 
 .medium-input { width: 80px; }
+
+.circle {
+  border: 2px solid var(--primary);
+  height:70px;
+  border-radius:50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  width:70px;
+}

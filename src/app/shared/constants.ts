@@ -5,10 +5,11 @@ export enum RoutesPathEnum {
 }
 
 export enum TrainingStatusEnum {
-  Stop = 'Stop',
+  // Stop = 'Stop',
   PreWorkout = 'Pre workout',
   Workout = 'Workout',
   PostWorkout = 'Post workout',
+  Finish = 'Finish'
 }
 
 export enum LocalStorageKeyEnum {

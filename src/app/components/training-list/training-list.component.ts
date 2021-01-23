@@ -20,6 +20,7 @@ export class TrainingListComponent implements OnInit {
   }
 
   async startTraining(training: Training) {
+    this.router.navigate([RoutesPathEnum.TrainingExecution]);
     await this.trainingService.startTraining(training);
   }
 

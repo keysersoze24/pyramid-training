@@ -1,7 +1,7 @@
-<div id="timer-container" class="mat-h1" *ngIf="countdown">
-  {{ restTime.getSecondsLeft() | async }}
+<div id="timer-container" class="mat-h1 circle" *ngIf="countdown">
+  {{ restTime?.getSecondsLeft() | async }}
 </div>
 
-<div id="timer-container" class="mat-h1" *ngIf="!countdown">
-  {{ restTime.getSecondElapsed() | async }}
+<div id="timer-container" class="mat-h1 circle" *ngIf="!countdown">
+  {{ restTime?.getSecondElapsed() | async }}
 </div>
