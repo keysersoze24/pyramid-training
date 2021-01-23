@@ -6,7 +6,7 @@
   <div class="col-12 d-flex justify-content-center align-items-center">
     <app-timer
       [countdown]="configService?.config?.countdownTimer"
-      [restTime]="(trainingService.getTrainingSelected() | async)?.restTime">
+      [restTime]="currentRestTime">
     </app-timer>
   </div>
 </div>

@@ -16,7 +16,9 @@ export class HomeComponent implements OnInit {
 
   constructor(public trainigService: TrainingService, private router: Router) { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void {
+    this.trainigService.updateTrainingSelected(null, null);
+  }
 
   newTraining() {
     this.router.navigate([RoutesPathEnum.TrainingCard]);

@@ -54,15 +54,13 @@ export class Pyramid {
 
 
   async start(): Promise<boolean> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       for (let i = 0; i < this._doublePyramid.length; i++) {
         const pyramidStep = new PyramidStep(this.restTimeReps.secondsSet, this._doublePyramid[i]);
         await pyramidStep.start();
-        await this.restTime.startTimer();
-        if (i == this._doublePyramid.length - 1) {
-          resolve(true);
-        }
       }
+      await this.restTime.startTimer();
+      resolve(true);
     });
   }
 
