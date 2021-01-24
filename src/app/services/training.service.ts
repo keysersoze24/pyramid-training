@@ -3,8 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
 import { Training } from '../models/training';
 import { TrainingSelected } from '../models/training-selected';
-import { LocalStorageKeyEnum, TrainingStatusEnum } from '../shared/constants';
+import { LocalStorageKeyEnum, TimerSoundsEnum, TrainingStatusEnum } from '../shared/constants';
 import { Utilities } from '../shared/utilities';
+import { TimerService } from './timer.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class TrainingService {
   private _trainingSelected$: BehaviorSubject<TrainingSelected> = new BehaviorSubject(null);
   //#endregion
 
-  constructor() {
+  constructor(private timerService: TimerService) {
     const allTrainings = this.getTrainingsFromLocalStorage();
     if (allTrainings?.length) {
       this._allTrainings$.next(allTrainings);
@@ -70,12 +71,11 @@ export class TrainingService {
   async startTraining(training: Training): Promise<boolean> {
     return new Promise(async resolve => {
       this.updateTrainingSelected(TrainingStatusEnum.PreWorkout, training);
-      await training.preWorkout.restTime.startTimer();
+      await training.preWorkout.restTime.startTimer(TimerSoundsEnum.MachineGun);
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
       await training.workout.start();
-      // await training.workout.restTime.startTimer();
       this.updateTrainingSelected(TrainingStatusEnum.PostWorkout);
-      await training.postWorkout.restTime.startTimer();
+      await training.postWorkout.restTime.startTimer(TimerSoundsEnum.MachineGun);
       this.updateTrainingSelected(TrainingStatusEnum.Finish);
       resolve(true);
     });

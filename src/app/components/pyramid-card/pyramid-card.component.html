@@ -15,7 +15,7 @@
         </mat-error>
       </mat-form-field>
 
-      <img src="assets/pyramid.png" height="40">
+      <img src="assets/icons/pyramid.png" height="40">
 
       <mat-form-field class="medium-input">
         <mat-label>Max reps</mat-label>
@@ -33,12 +33,11 @@
 
     </div>
 
-    <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-      <mat-checkbox formControlName="reverse" [(ngModel)]="pyramid.reverse">Start from base</mat-checkbox>
+    <div class="col-6 d-flex flex-column align-items-center justify-content-between">
 
-      <mat-form-field class="small-input">
-        <mat-label>Rest sec</mat-label>
-        <input matInput class="small-input" formControlName="restTime" [(ngModel)]="pyramid?.restTime.secondsSet">
+      <mat-form-field class="medium-input">
+        <mat-label>Sec. rep</mat-label>
+        <input matInput formControlName="restTime" [(ngModel)]="pyramid?.restTime.secondsSet">
         <mat-error *ngIf="formValidator?.restTime?.errors?.min">
           Must be greater than zero
         </mat-error>
@@ -46,15 +45,22 @@
           Mandatory
         </mat-error>
       </mat-form-field>
+
+      <mat-checkbox formControlName="reverse" [(ngModel)]="pyramid.reverse">Start from base</mat-checkbox>
+
+      <mat-form-field class="medium-input">
+        <mat-label>Sec. shot</mat-label>
+        <input matInput formControlName="restTimeReps" [(ngModel)]="pyramid?.restTimeReps.secondsSet">
+        <mat-error *ngIf="formValidator?.restTimeReps?.errors?.min">
+          Must be greater than zero
+        </mat-error>
+        <mat-error *ngIf="formValidator?.restTimeReps?.errors?.required">
+          Mandatory
+        </mat-error>
+      </mat-form-field>
     </div>
 
 
   </div>
-
-
-  <div id="confirm-buttons">
-
-  </div>
-  <app-confirm-or-deny-buttons (valueSelected)="onButtonValueSelected($event)"></app-confirm-or-deny-buttons>
 
 </form>

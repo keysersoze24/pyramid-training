@@ -1,15 +1,5 @@
-<h2>
-  Set:
-</h2>
-
 <h3>
-  Do n reps
+  Do {{ (((trainingService.getTrainingSelected() | async)?.training?.workout?.getCurrentPyramid() | async)?.getCurrentPyramidStep() | async)?.totalReps }} reps
 </h3>
 
 
-<mat-progress-bar
-class="example-margin"
-color="accent"
-mode="determinate"
-value="50">
-</mat-progress-bar>

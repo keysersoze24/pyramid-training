@@ -22,4 +22,9 @@ export enum TimerStatusEnum {
   Stopped = 'stopped'
 }
 
+export enum TimerSoundsEnum {
+  Gun = 'gun',
+  MachineGun = 'machinegun'
+}
+
 export const MILLISEC_SECOND = 1000;

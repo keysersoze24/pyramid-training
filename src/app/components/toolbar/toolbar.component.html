@@ -12,7 +12,7 @@
         Pyramid training
     </div>
 
-    <div class="col-6 d-flex justify-content-end">
+    <div class="col-6 d-flex justify-content-end" *ngIf="currentPath == RoutesPathEnum.Home">
       <button mat-icon-button (click)="openConfig()">
         <mat-icon>
           settings

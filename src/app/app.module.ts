@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ConfigComponent } from './components/config/config.component';
 import { PyramidExecutionComponent } from './components/pyramid-execution/pyramid-execution.component';
+import { WorkoutExecutionComponent } from './components/workout-execution/workout-execution.component';
+import { TrainingExecutionButtonsComponent } from './components/training-execution-buttons/training-execution-buttons.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PyramidExecutionComponent } from './components/pyramid-execution/pyrami
     DividerComponent,
     PyramidCardComponent,
     ConfigComponent,
-    PyramidExecutionComponent
+    PyramidExecutionComponent,
+    WorkoutExecutionComponent,
+    TrainingExecutionButtonsComponent
   ],
   imports: [
     BrowserModule,

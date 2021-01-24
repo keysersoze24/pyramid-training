@@ -1,0 +1,10 @@
+<h2>
+  Pyramids done: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.pyramidsDone  ) }}
+  of: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.pyramids?.length  ) }}
+</h2>
+
+<div class="row">
+  <div class="col-12">
+    <app-pyramid-execution></app-pyramid-execution>
+  </div>
+</div>

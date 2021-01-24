@@ -18,20 +18,25 @@ export class PyramidCardComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData: Pyramid, public dialogRef: MatDialogRef<Pyramid>,
    private formBuilder: FormBuilder) {
-    this.pyramid = lodash.cloneDeep(dialogData);
-    this.formValidator = new PyramidCardFormValidator(this.formBuilder, this.pyramid);
+    this.pyramid = this.dialogData;
+    this.formValidator = new PyramidCardFormValidator(this.formBuilder, this.dialogData);
     this.formGroup = this.formValidator.formGroup;
   }
 
   ngOnInit(): void {
+    this.dialogRef.beforeClosed().subscribe(res => {
+      console.log('before close')
+    })
   }
 
+  /*
   onButtonValueSelected(pyramidConfirmed: boolean) {
     if (pyramidConfirmed) {
-      this.dialogRef.close(<Pyramid>this.pyramid);
+      this.dialogRef.close(<Pyramid>this.dialogData);
     } else {
       this.dialogRef.close();
     }
   }
+  */
 
 }

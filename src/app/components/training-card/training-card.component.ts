@@ -5,14 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { PostWorkout } from 'src/app/models/post-workout';
 import { PreWorkout } from 'src/app/models/pre-workout';
-import { RestTime } from 'src/app/models/rest-time';
 import { Training } from 'src/app/models/training';
 import { Workout } from 'src/app/models/workout';
 import { TrainingService } from 'src/app/services/training.service';
 import { RoutesPathEnum } from 'src/app/shared/constants';
 import { PyramidCardComponent } from '../pyramid-card/pyramid-card.component';
 import { TrainingCardFormValidator } from './training-card-form-validator';
-import * as lodash from 'lodash';
 import { Pyramid } from 'src/app/models/pyramid';
 
 @Component({
@@ -48,7 +46,6 @@ export class TrainingCardComponent implements OnInit {
 
   openPyramidDialog() {
     const dialogRef = this.dialog.open(PyramidCardComponent, {
-      disableClose: true,
       scrollStrategy: this.overlay.scrollStrategies.noop(),
       data: this.training.workout.pyramids[0],
       width: '100vw',

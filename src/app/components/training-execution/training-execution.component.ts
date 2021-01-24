@@ -52,9 +52,4 @@ export class TrainingExecutionComponent implements OnInit {
       this.router.navigate([RoutesPathEnum.Home]);
     }, 1000);
   }
-
-  stopTraining() {
-    const trainingSelected = this.trainingService.getTrainingSelectedSync();
-    trainingSelected.restTime.pauseTimer();
-  }
 }

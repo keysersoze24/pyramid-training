@@ -1,11 +1,12 @@
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { PyramidStep } from './pyramid-rep';
+import { TimerSoundsEnum } from '../shared/constants';
+import { PyramidStep } from './pyramid-step';
 import { RestTime } from './rest-time';
 
 export class Pyramid {
 
-  private _pyramidStep: PyramidStep;
+  private _currentPyramidStep: BehaviorSubject<PyramidStep> = new BehaviorSubject(null);
 
   basePyramid: number;
   apexPyramid: number;
@@ -52,14 +53,18 @@ export class Pyramid {
     this.reverse = reverse;
   }
 
+  getCurrentPyramidStep() {
+    return this._currentPyramidStep.asObservable().pipe(share());
+  }
 
   async start(): Promise<boolean> {
     return new Promise(async resolve => {
       for (let i = 0; i < this._doublePyramid.length; i++) {
         const pyramidStep = new PyramidStep(this.restTimeReps.secondsSet, this._doublePyramid[i]);
+        this._currentPyramidStep.next(pyramidStep);
         await pyramidStep.start();
+        await this.restTime.startTimer();
       }
-      await this.restTime.startTimer();
       resolve(true);
     });
   }
