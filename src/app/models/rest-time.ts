@@ -1,7 +1,6 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
 import Timer from 'tiny-timer';
-import { TimerService } from '../services/timer.service';
 import { MILLISEC_SECOND, TimerSoundsEnum, TimerStatusEnum } from '../shared/constants';
 
 export class RestTime {

@@ -1,6 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { TimerSoundsEnum } from '../shared/constants';
+import { TrainingService } from '../services/training.service';
+import { TrainingStatusEnum } from '../shared/constants';
 import { PyramidStep } from './pyramid-step';
 import { RestTime } from './rest-time';
 

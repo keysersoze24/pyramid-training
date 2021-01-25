@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { TimerService } from 'src/app/services/timer.service';
 import { TrainingService } from 'src/app/services/training.service';
 import { RoutesPathEnum, TrainingStatusEnum } from 'src/app/shared/constants';
 
@@ -12,7 +11,7 @@ import { RoutesPathEnum, TrainingStatusEnum } from 'src/app/shared/constants';
 export class HomeComponent implements OnInit {
   TrainingStatusEnum = TrainingStatusEnum;
 
-  constructor(public trainigService: TrainingService, private router: Router, private timerService: TimerService) { }
+  constructor(public trainigService: TrainingService, private router: Router) { }
 
   ngOnInit(): void {
     this.trainigService.updateTrainingSelected(null, null);

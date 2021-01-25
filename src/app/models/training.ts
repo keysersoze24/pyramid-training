@@ -35,7 +35,8 @@ export class Training {
     const preWorkout = new PreWorkout(10);
     this.preWorkout = preWorkout;
     const workout = new Workout(10);
-    const pyramid = new Pyramid(5, 1, 10, 2, true);
+    const pyramid = new Pyramid(3, 1, 5, 2, true);
+    workout.pyramids.push(pyramid);
     workout.pyramids.push(pyramid);
     this.workout = workout;
     const postWorkout = new PostWorkout(10);

@@ -1,5 +1,5 @@
 <h2>
-  Pyramids done: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.pyramidsDone  ) }}
+  Pyramids done: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.getPyramidsDone() | async ) }}
   of: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.pyramids?.length  ) }}
 </h2>
 

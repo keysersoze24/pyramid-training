@@ -5,7 +5,6 @@ import { Training } from '../models/training';
 import { TrainingSelected } from '../models/training-selected';
 import { LocalStorageKeyEnum, TimerSoundsEnum, TrainingStatusEnum } from '../shared/constants';
 import { Utilities } from '../shared/utilities';
-import { TimerService } from './timer.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +15,7 @@ export class TrainingService {
   private _trainingSelected$: BehaviorSubject<TrainingSelected> = new BehaviorSubject(null);
   //#endregion
 
-  constructor(private timerService: TimerService) {
+  constructor() {
     const allTrainings = this.getTrainingsFromLocalStorage();
     if (allTrainings?.length) {
       this._allTrainings$.next(allTrainings);
@@ -73,11 +72,16 @@ export class TrainingService {
       this.updateTrainingSelected(TrainingStatusEnum.PreWorkout, training);
       await training.preWorkout.restTime.startTimer(TimerSoundsEnum.MachineGun);
       this.updateTrainingSelected(TrainingStatusEnum.Workout);
+      // spostare logica successiva nel compoente training-execution
+
+
+      /*
       await training.workout.start();
       this.updateTrainingSelected(TrainingStatusEnum.PostWorkout);
       await training.postWorkout.restTime.startTimer(TimerSoundsEnum.MachineGun);
       this.updateTrainingSelected(TrainingStatusEnum.Finish);
       resolve(true);
+      */
     });
   }
   //#endregion
