@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-12 d-flex justify-content-center">
-    <button mat-icon-button color="primary" (click)="pauseTraining()" *ngIf="(trainingService.getTrainingSelected() | async)?.status && (trainingService.getTrainingSelected() | async)?.status != TrainingStatusEnum.Finish">
+    <button mat-icon-button color="primary" (click)="pauseTraining()">
       <mat-icon>
         pause
       </mat-icon>
     </button>
-    <button mat-icon-button color="primary">
+    <button mat-icon-button color="primary" (click)="resumeTraining()">
       <mat-icon>
         play
       </mat-icon>

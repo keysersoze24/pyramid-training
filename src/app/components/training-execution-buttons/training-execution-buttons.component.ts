@@ -17,13 +17,11 @@ export class TrainingExecutionButtonsComponent implements OnInit {
   }
 
   pauseTraining() {
-    const trainingSelected = this.trainingService.getTrainingSelectedSync();
-    trainingSelected.restTime.pauseTimer();
+
   }
 
   resumeTraining() {
-    const trainingSelected = this.trainingService.getTrainingSelectedSync();
-    trainingSelected.restTime.resumeTimer();
+
   }
 
 }

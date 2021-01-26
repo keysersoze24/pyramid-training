@@ -1,6 +1,6 @@
 <h2>
-  Pyramids done: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.getPyramidsDone() | async ) }}
-  of: {{ ((trainingService?.getTrainingSelected() | async)?.training?.workout?.pyramids?.length  ) }}
+  Pyramids done: {{ training?.workout?.getPyramidsDone() | async }}
+  of: {{ training?.workout?.pyramids?.length }}
 </h2>
 
 <div class="row">

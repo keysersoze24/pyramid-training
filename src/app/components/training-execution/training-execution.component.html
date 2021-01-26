@@ -1,8 +1,8 @@
-<h2 class="text-center">
+<!--h2 class="text-center">
   {{ (trainingService.getTrainingSelected() | async)?.status }}
-</h2>
+</h2-->
 
-<div class="row" *ngIf="(trainingService.getTrainingSelected() | async)?.status && (trainingService.getTrainingSelected() | async)?.status != TrainingStatusEnum.Finish">
+<div class="row">
   <div class="col-12 d-flex justify-content-center align-items-center">
     <app-timer
       [countdown]="configService?.config?.countdownTimer"
@@ -12,6 +12,6 @@
 </div>
 
 
-<app-workout-execution></app-workout-execution>
+<app-workout-execution [training]="training"></app-workout-execution>
 
 <app-training-execution-buttons></app-training-execution-buttons>

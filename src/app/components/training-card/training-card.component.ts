@@ -77,7 +77,7 @@ export class TrainingCardComponent implements OnInit {
     for (let i = 0; i < workoutReps; i++) {
       this.training.workout.pyramids.push(firstPyramid);
     }
-    this.trainingService.addTraining(this.training);
+    this.trainingService.saveTraining(this.training);
     this.router.navigate([RoutesPathEnum.Home]);
   }
 }

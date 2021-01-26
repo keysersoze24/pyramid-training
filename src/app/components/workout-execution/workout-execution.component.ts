@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Training } from 'src/app/models/training';
 import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { TrainingService } from 'src/app/services/training.service';
   styleUrls: ['./workout-execution.component.scss']
 })
 export class WorkoutExecutionComponent implements OnInit {
+
+  @Input() training: Training;
 
   constructor(public trainingService: TrainingService) { }
 

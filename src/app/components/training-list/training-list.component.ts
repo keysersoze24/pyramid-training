@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Training } from 'src/app/models/training';
 import { TrainingService } from 'src/app/services/training.service';
-import { RoutesPathEnum, TrainingStatusEnum } from 'src/app/shared/constants';
+import { RoutesPathEnum } from 'src/app/shared/constants';
 import { ConfirmOrDenyButtonsComponent } from '../confirm-or-deny-buttons/confirm-or-deny-buttons.component';
 
 @Component({
@@ -19,13 +19,12 @@ export class TrainingListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async startTraining(training: Training) {
-    this.router.navigate([RoutesPathEnum.TrainingExecution]);
-    await this.trainingService.startTraining(training);
+  startTraining(training: Training) {
+    this.router.navigate([RoutesPathEnum.TrainingExecution], { state: { trainingId: training.id } });
   }
 
   editTraining(training: Training) {
-    this.router.navigate([RoutesPathEnum.TrainingCard], { state: { training: training }  });
+    // this.router.navigate([RoutesPathEnum.TrainingCard], { state: { training: training }  });
   }
 
   deleteTraining(training: Training) {

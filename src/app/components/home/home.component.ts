@@ -8,14 +8,10 @@ import { RoutesPathEnum, TrainingStatusEnum } from 'src/app/shared/constants';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   TrainingStatusEnum = TrainingStatusEnum;
 
   constructor(public trainigService: TrainingService, private router: Router) { }
-
-  ngOnInit(): void {
-    this.trainigService.updateTrainingSelected(null, null);
-  }
 
   newTraining() {
     this.router.navigate([RoutesPathEnum.TrainingCard]);

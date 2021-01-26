@@ -1,7 +1,5 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { share } from 'rxjs/operators';
-import { TrainingService } from '../services/training.service';
-import { TrainingStatusEnum } from '../shared/constants';
 import { PyramidStep } from './pyramid-step';
 import { RestTime } from './rest-time';
 
@@ -15,7 +13,7 @@ export class Pyramid {
   restTime: RestTime;
   restTimeReps: RestTime;
 
-  private get _doublePyramid(): number[] {
+  get doublePyramid(): number[] {
     let result: number[] = [];
 
     if (this.reverse) {
@@ -54,20 +52,12 @@ export class Pyramid {
     this.reverse = reverse;
   }
 
-  getCurrentPyramidStep() {
+  getCurrentPyramidStep(): Observable<PyramidStep> {
     return this._currentPyramidStep.asObservable().pipe(share());
   }
 
-  async start(): Promise<boolean> {
-    return new Promise(async resolve => {
-      for (let i = 0; i < this._doublePyramid.length; i++) {
-        const pyramidStep = new PyramidStep(this.restTimeReps.secondsSet, this._doublePyramid[i]);
-        this._currentPyramidStep.next(pyramidStep);
-        await pyramidStep.start();
-        await this.restTime.startTimer();
-      }
-      resolve(true);
-    });
+  updatePyramidStep(pyramidStep: PyramidStep) {
+    this._currentPyramidStep.next(pyramidStep);
   }
 
 }

@@ -18,22 +18,18 @@ export class PyramidStep {
     for (let i = 0; i < this.totalReps; i++) {
       this._restTimes.push(this.restTime);
     }
-
-  }
-
-  async start(): Promise<boolean> {
-    return new Promise(async resolve => {
-      for (let i = 0; i < this.totalReps; i++) {
-        const repsToDo = this.totalReps[i];
-        this._repsToDo$.next(repsToDo);
-        await this.restTime.startTimer(TimerSoundsEnum.Gun);
-      }
-      resolve(true);
-    })
   }
 
   getRepsToDo(): Observable<number> {
     return this._repsToDo$.asObservable().pipe(share());
+  }
+
+  getRepsToDoSync(): number {
+    return this._repsToDo$.getValue();
+  }
+
+  updateRepsToDo(repsToDo: number): void {
+    this._repsToDo$.next(repsToDo);
   }
 
 }
