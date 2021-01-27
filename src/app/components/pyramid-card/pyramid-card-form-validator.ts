@@ -16,7 +16,7 @@ export class PyramidCardFormValidator {
       basePyramid: [pyramid?.basePyramid, [Validators.required, Validators.min(1)]],
       apexPyramid: [pyramid?.apexPyramid, [Validators.required, Validators.min(1)]],
       restTime: [pyramid?.restTime?.secondsSet, [Validators.required, Validators.min(1)]],
-      restTimeReps: [pyramid?.restTimeReps?.secondsSet, [Validators.required, Validators.min(1)]],
+      restTimeReps: [pyramid?.restTimeShots?.secondsSet, [Validators.required, Validators.min(1)]],
       reverse: [new Boolean(pyramid?.reverse).valueOf()]
     })
 

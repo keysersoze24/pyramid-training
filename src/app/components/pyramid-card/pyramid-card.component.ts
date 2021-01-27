@@ -29,14 +29,5 @@ export class PyramidCardComponent implements OnInit {
     })
   }
 
-  /*
-  onButtonValueSelected(pyramidConfirmed: boolean) {
-    if (pyramidConfirmed) {
-      this.dialogRef.close(<Pyramid>this.dialogData);
-    } else {
-      this.dialogRef.close();
-    }
-  }
-  */
 
 }

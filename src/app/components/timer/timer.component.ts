@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
 import { RestTime } from 'src/app/models/rest-time';
+import { TimerService } from 'src/app/services/timer.service';
 import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
@@ -7,17 +8,11 @@ import { TrainingService } from 'src/app/services/training.service';
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss']
 })
-export class TimerComponent implements OnChanges {
+export class TimerComponent {
 
-  @Input() restTime: RestTime;
   @Input() countdown: boolean;
 
-  constructor(public trainingService: TrainingService, private cd: ChangeDetectorRef) { }
-
-  ngOnChanges(): void {
-    console.log(this.restTime);
-    this.cd.detectChanges();
-  }
+  constructor(public timerService: TimerService) { }
 
 
 

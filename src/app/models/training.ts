@@ -23,7 +23,7 @@ export class Training {
       this.preWorkout = new PreWorkout(training.preWorkout?.restTime?.secondsSet);
       this.workout = new Workout(training.workout?.restTime?.secondsSet);
       this.workout.pyramids = training.workout?.pyramids.map(pyramid => {
-        return new Pyramid(pyramid.basePyramid, pyramid.apexPyramid, pyramid.restTime.secondsSet, pyramid.restTimeReps.secondsSet, pyramid.reverse);
+        return new Pyramid(pyramid.basePyramid, pyramid.apexPyramid, pyramid.restTime.secondsSet, pyramid.restTimeShots.secondsSet, pyramid.reverse);
       })
       this.postWorkout = new PostWorkout(training.postWorkout.restTime?.secondsSet);
     }
@@ -35,7 +35,7 @@ export class Training {
     const preWorkout = new PreWorkout(10);
     this.preWorkout = preWorkout;
     const workout = new Workout(10);
-    const pyramid = new Pyramid(3, 1, 5, 2, true);
+    const pyramid = new Pyramid(3, 1, 10, 2, true);
     workout.pyramids.push(pyramid);
     workout.pyramids.push(pyramid);
     this.workout = workout;

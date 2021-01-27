@@ -9,15 +9,10 @@ export class PyramidStep {
 
   private _repsToDo$: BehaviorSubject<number> = new BehaviorSubject(0);
 
-  private _restTimes: RestTime [] = [];
-  get restTimes(): RestTime [] { return this._restTimes };
-
   constructor(secondsRest: number, totalReps: number) {
     this.restTime = new RestTime(secondsRest);
-    this.totalReps = totalReps
-    for (let i = 0; i < this.totalReps; i++) {
-      this._restTimes.push(this.restTime);
-    }
+    this.totalReps = totalReps;
+    this._repsToDo$.next(totalReps);
   }
 
   getRepsToDo(): Observable<number> {

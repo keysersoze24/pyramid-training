@@ -50,7 +50,7 @@
 
       <mat-form-field class="medium-input">
         <mat-label>Sec. shot</mat-label>
-        <input matInput formControlName="restTimeReps" [(ngModel)]="pyramid?.restTimeReps.secondsSet">
+        <input matInput formControlName="restTimeReps" [(ngModel)]="pyramid?.restTimeShots.secondsSet">
         <mat-error *ngIf="formValidator?.restTimeReps?.errors?.min">
           Must be greater than zero
         </mat-error>

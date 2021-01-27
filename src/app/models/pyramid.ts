@@ -11,24 +11,24 @@ export class Pyramid {
   apexPyramid: number;
   reverse: boolean = true;
   restTime: RestTime;
-  restTimeReps: RestTime;
+  restTimeShots: RestTime;
 
-  get doublePyramid(): number[] {
-    let result: number[] = [];
+  get doublePyramid(): PyramidStep[] {
+    let result: PyramidStep[] = [];
 
     if (this.reverse) {
       for (let i = this.apexPyramid; i <= this.basePyramid; i++) {
-        result.push(i);
+        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
       }
       for (let i = this.basePyramid - 1; i >= this.apexPyramid; i--) {
-        result.push(i);
+        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
       }
     } else {
       for (let i = this.basePyramid; i >= this.apexPyramid; i--) {
-        result.push(i);
+        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
       }
       for (let i = this.apexPyramid + 1; i <= this.basePyramid; i++) {
-        result.push(i);
+        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
       }
     }
     return result;
@@ -38,7 +38,7 @@ export class Pyramid {
     basePyramid: number,
     apexPyramid: number,
     secondsRest: number,
-    secondsRestReps: number,
+    secondsRestShots: number,
     reverse: boolean
   ) {
     if (basePyramid > 0 && apexPyramid > 0) {
@@ -48,7 +48,7 @@ export class Pyramid {
       }
     }
     this.restTime = new RestTime(secondsRest);
-    this.restTimeReps = new RestTime(secondsRestReps);
+    this.restTimeShots = new RestTime(secondsRestShots);
     this.reverse = reverse;
   }
 
@@ -56,7 +56,7 @@ export class Pyramid {
     return this._currentPyramidStep.asObservable().pipe(share());
   }
 
-  updatePyramidStep(pyramidStep: PyramidStep) {
+  updateCurrentPyramidStep(pyramidStep: PyramidStep) {
     this._currentPyramidStep.next(pyramidStep);
   }
 
