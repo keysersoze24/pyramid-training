@@ -48,11 +48,11 @@ export class TrainingExecutionComponent {
   }
 
   async startTraining(training: Training) {
-    this.timerService.updateCurrentRestTime(training.preWorkout.restTime);
-    await this.timerService.getCurrentRestTimeSync().startTimer();
+    // this.timerService.updateCurrentRestTime(training.preWorkout.restTime);
+    // await this.timerService.getCurrentRestTimeSync().startTimer(TimerSoundsEnum.MachineGun);
     await this.executeWorkout(training.workout);
-    this.timerService.updateCurrentRestTime(training.postWorkout.restTime);
-    await this.timerService.getCurrentRestTimeSync().startTimer();
+    // this.timerService.updateCurrentRestTime(training.postWorkout.restTime);
+    // await this.timerService.getCurrentRestTimeSync().startTimer(TimerSoundsEnum.Gun);
   }
 
   // esecuzione di tutte le piramidi + tempo di recupero tra una e l'altra
@@ -81,7 +81,9 @@ export class TrainingExecutionComponent {
         pyramid.updateCurrentPyramidStep(pyramidStep);
         await this.executePyramidShots(pyramidStep);
         this.timerService.updateCurrentRestTime(pyramid.restTime);
-        await this.timerService.getCurrentRestTimeSync().startTimer(TimerSoundsEnum.MachineGun);
+        await this.timerService
+          .getCurrentRestTimeSync()
+          .startTimer(TimerSoundsEnum.MachineGun);
       }
       resolve(true);
     });
@@ -89,14 +91,10 @@ export class TrainingExecutionComponent {
 
   // esecuzione delle "botte" di un singolo step
   async executePyramidShots(pyramidStep: PyramidStep): Promise<boolean> {
-    this.timerService.updateCurrentRestTime(null);
     return new Promise(async (resolve) => {
-      for (let i = 0; i < pyramidStep.getRepsToDoSync(); i++) {
-        const repsToDo = pyramidStep.getRepsToDoSync();
-        const pyramidShotDone: boolean = await pyramidStep.restTime.startTimer(TimerSoundsEnum.Gun);
-        if (pyramidShotDone) {
-          pyramidStep.updateRepsToDo(repsToDo - 1);
-        }
+      for (let i = 0; i < pyramidStep.totalReps; i++) {
+        this.timerService.updateCurrentRestTime(pyramidStep.restTime);
+        await pyramidStep.restTime.startTimer(TimerSoundsEnum.Gun);
       }
       resolve(true);
     });
