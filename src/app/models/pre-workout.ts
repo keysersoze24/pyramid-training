@@ -1,10 +1,3 @@
 import { RestTime } from "./rest-time";
 
-export class PreWorkout {
-
-  restTime: RestTime;
-
-  constructor(secondsRest: number) {
-    this.restTime = new RestTime(secondsRest);
-  }
-}
+export class PreWorkout extends RestTime { }

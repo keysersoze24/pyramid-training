@@ -15,10 +15,10 @@ export class TrainingCardFormValidator {
   constructor(fb: FormBuilder, training: Training) {
     this._formGroup = fb.group({
       trainingName: [training?.name, [Validators.required]],
-      preWorkoutRestTime: [training?.preWorkout?.restTime?.secondsSet, [Validators.required, Validators.min(1)]],
+      preWorkoutRestTime: [training?.preWorkout?.restSeconds, [Validators.required, Validators.min(1)]],
       workoutReps: [training?.workout?.pyramids?.length, [Validators.required, Validators.min(1)]],
-      workoutRestTime: [training?.workout?.restTime?.secondsSet, [Validators.required, Validators.min(1)]],
-      postWorkoutRestTime: [training?.postWorkout?.restTime?.secondsSet, [Validators.required, Validators.min(1)]]
+      workoutRestTime: [training?.workout?.restTime?.restSeconds, [Validators.required, Validators.min(1)]],
+      postWorkoutRestTime: [training?.postWorkout?.restSeconds, [Validators.required, Validators.min(1)]]
     })
   }
 

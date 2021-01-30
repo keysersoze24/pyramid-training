@@ -30,4 +30,4 @@ export enum TimerSoundsEnum {
 }
 
 
-export const MILLISEC_SECOND = 1000;
+export const MILLISEC_IN_SECOND = 1000;

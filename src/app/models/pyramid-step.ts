@@ -1,6 +1,5 @@
 import { BehaviorSubject, Observable } from "rxjs";
 import { share } from "rxjs/operators";
-import { TimerSoundsEnum } from "../shared/constants";
 import { RestTime } from "./rest-time";
 
 export class PyramidStep {
@@ -9,8 +8,8 @@ export class PyramidStep {
 
   private _repsToDo$: BehaviorSubject<number> = new BehaviorSubject(0);
 
-  constructor(secondsRest: number, totalReps: number) {
-    this.restTime = new RestTime(secondsRest);
+  constructor(restSeconds: number, totalReps: number) {
+    this.restTime = new RestTime(restSeconds);
     this.totalReps = totalReps;
     this._repsToDo$.next(totalReps);
   }

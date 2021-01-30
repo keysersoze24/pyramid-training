@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pyramid } from 'src/app/models/pyramid';
 import { PyramidStep } from 'src/app/models/pyramid-step';
-import { RestTime } from 'src/app/models/rest-time';
 import { Training } from 'src/app/models/training';
 import { Workout } from 'src/app/models/workout';
 import { ConfigService } from 'src/app/services/config.service';
@@ -41,49 +40,36 @@ export class TrainingExecutionComponent {
     }
   }
 
-  ngOnInit(): void {
-    this.timerService.getCurrentRestTime().subscribe((restTime) => {
-      console.log(`currentRestTime: ${restTime}`);
-    });
-  }
+  ngOnInit(): void { }
 
   async startTraining(training: Training) {
-    // this.timerService.updateCurrentRestTime(training.preWorkout.restTime);
-    // await this.timerService.getCurrentRestTimeSync().startTimer(TimerSoundsEnum.MachineGun);
+    await this.timerService.startTimer(training.preWorkout.restSeconds, TimerSoundsEnum.MachineGun);
     await this.executeWorkout(training.workout);
-    // this.timerService.updateCurrentRestTime(training.postWorkout.restTime);
-    // await this.timerService.getCurrentRestTimeSync().startTimer(TimerSoundsEnum.Gun);
+    await this.timerService.startTimer(training.postWorkout.restSeconds, TimerSoundsEnum.Gun);
   }
 
   // esecuzione di tutte le piramidi + tempo di recupero tra una e l'altra
+
   async executeWorkout(workout: Workout): Promise<boolean> {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async resolve => {
       for (let i = 0; i < workout.pyramids.length; i++) {
         const pyramid = workout.pyramids[i];
-        workout.updateCurrentPyramid(pyramid);
         await this.executePyramidSteps(pyramid);
         workout.updatePyramidsDone(workout.getPyramidsDoneSync() + 1);
-        if (workout.pyramids.length == workout.getPyramidsDoneSync()) {
-          resolve(true);
-        }
-
-        this.timerService.updateCurrentRestTime(workout.restTime);
-        await this.timerService.getCurrentRestTimeSync().startTimer();
+        await this.timerService.startTimer(workout.restTime.restSeconds);
       }
+      resolve(true);
     });
   }
 
   // esecuzione di tutti gli step (piani) di una singola piramide
   async executePyramidSteps(pyramid: Pyramid): Promise<boolean> {
-    return new Promise(async (resolve) => {
+    return new Promise(async resolve => {
       for (let i = 0; i < pyramid.doublePyramid?.length; i++) {
         const pyramidStep = pyramid.doublePyramid[i];
         pyramid.updateCurrentPyramidStep(pyramidStep);
         await this.executePyramidShots(pyramidStep);
-        this.timerService.updateCurrentRestTime(pyramid.restTime);
-        await this.timerService
-          .getCurrentRestTimeSync()
-          .startTimer(TimerSoundsEnum.MachineGun);
+        await this.timerService.startTimer(pyramid.restTime.restSeconds, TimerSoundsEnum.MachineGun);
       }
       resolve(true);
     });
@@ -91,10 +77,9 @@ export class TrainingExecutionComponent {
 
   // esecuzione delle "botte" di un singolo step
   async executePyramidShots(pyramidStep: PyramidStep): Promise<boolean> {
-    return new Promise(async (resolve) => {
+    return new Promise(async resolve => {
       for (let i = 0; i < pyramidStep.totalReps; i++) {
-        this.timerService.updateCurrentRestTime(pyramidStep.restTime);
-        await pyramidStep.restTime.startTimer(TimerSoundsEnum.Gun);
+        await this.timerService.startTimer(pyramidStep.restTime.restSeconds, TimerSoundsEnum.Gun);
       }
       resolve(true);
     });

@@ -2,7 +2,6 @@ import { Utilities } from "../shared/utilities";
 import { Pyramid } from "./pyramid";
 import { PostWorkout } from "./post-workout";
 import { PreWorkout } from "./pre-workout";
-import { RestTime } from "./rest-time";
 import { Workout } from "./workout";
 
 export class Training {
@@ -20,12 +19,12 @@ export class Training {
     this.defaultTraining();
     if (training) {
       this.name = training.name;
-      this.preWorkout = new PreWorkout(training.preWorkout?.restTime?.secondsSet);
-      this.workout = new Workout(training.workout?.restTime?.secondsSet);
-      this.workout.pyramids = training.workout?.pyramids.map(pyramid => {
-        return new Pyramid(pyramid.basePyramid, pyramid.apexPyramid, pyramid.restTime.secondsSet, pyramid.restTimeShots.secondsSet, pyramid.reverse);
+      this.preWorkout = new PreWorkout(training.preWorkout.restSeconds);
+      this.workout = new Workout(training.workout.restTime.restSeconds);
+      this.workout.pyramids = training.workout.pyramids.map(pyramid => {
+        return new Pyramid(pyramid.basePyramid, pyramid.apexPyramid, pyramid.restTime.restSeconds, pyramid.restTimeShots.restSeconds, pyramid.reverse)
       })
-      this.postWorkout = new PostWorkout(training.postWorkout.restTime?.secondsSet);
+      this.postWorkout = new PostWorkout(training.postWorkout.restSeconds);
     }
   }
 

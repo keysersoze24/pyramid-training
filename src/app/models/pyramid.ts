@@ -12,27 +12,7 @@ export class Pyramid {
   reverse: boolean = true;
   restTime: RestTime;
   restTimeShots: RestTime;
-
-  get doublePyramid(): PyramidStep[] {
-    let result: PyramidStep[] = [];
-
-    if (this.reverse) {
-      for (let i = this.apexPyramid; i <= this.basePyramid; i++) {
-        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
-      }
-      for (let i = this.basePyramid - 1; i >= this.apexPyramid; i--) {
-        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
-      }
-    } else {
-      for (let i = this.basePyramid; i >= this.apexPyramid; i--) {
-        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
-      }
-      for (let i = this.apexPyramid + 1; i <= this.basePyramid; i++) {
-        result.push(new PyramidStep(this.restTimeShots.secondsSet, i));
-      }
-    }
-    return result;
-  }
+  doublePyramid: PyramidStep [] = [];
 
   constructor(
     basePyramid: number,
@@ -41,15 +21,26 @@ export class Pyramid {
     secondsRestShots: number,
     reverse: boolean
   ) {
-    if (basePyramid > 0 && apexPyramid > 0) {
-      if (basePyramid > apexPyramid) {
-        this.basePyramid = basePyramid;
-        this.apexPyramid = apexPyramid;
-      }
-    }
+    this.basePyramid = basePyramid;
+    this.apexPyramid = apexPyramid;
     this.restTime = new RestTime(secondsRest);
     this.restTimeShots = new RestTime(secondsRestShots);
     this.reverse = reverse;
+    if (this.reverse) {
+      for (let i = this.apexPyramid; i <= this.basePyramid; i++) {
+        this.doublePyramid.push(new PyramidStep(this.restTimeShots.restSeconds, i));
+      }
+      for (let i = this.basePyramid - 1; i >= this.apexPyramid; i--) {
+        this.doublePyramid.push(new PyramidStep(this.restTimeShots.restSeconds, i));
+      }
+    } else {
+      for (let i = this.basePyramid; i >= this.apexPyramid; i--) {
+        this.doublePyramid.push(new PyramidStep(this.restTimeShots.restSeconds, i));
+      }
+      for (let i = this.apexPyramid + 1; i <= this.basePyramid; i++) {
+        this.doublePyramid.push(new PyramidStep(this.restTimeShots.restSeconds, i));
+      }
+    }
   }
 
   getCurrentPyramidStep(): Observable<PyramidStep> {

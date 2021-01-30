@@ -37,11 +37,11 @@
 
       <mat-form-field class="medium-input">
         <mat-label>Sec. rep</mat-label>
-        <input matInput formControlName="restTime" [(ngModel)]="pyramid?.restTime.secondsSet">
-        <mat-error *ngIf="formValidator?.restTime?.errors?.min">
+        <input matInput formControlName="restSeconds" [(ngModel)]="pyramid?.restTime.restSeconds">
+        <mat-error *ngIf="formValidator?.restSeconds?.errors?.min">
           Must be greater than zero
         </mat-error>
-        <mat-error *ngIf="formValidator?.restTime?.errors?.required">
+        <mat-error *ngIf="formValidator?.restSeconds?.errors?.required">
           Mandatory
         </mat-error>
       </mat-form-field>
@@ -50,11 +50,11 @@
 
       <mat-form-field class="medium-input">
         <mat-label>Sec. shot</mat-label>
-        <input matInput formControlName="restTimeReps" [(ngModel)]="pyramid?.restTimeShots.secondsSet">
-        <mat-error *ngIf="formValidator?.restTimeReps?.errors?.min">
+        <input matInput formControlName="restSecondsShot" [(ngModel)]="pyramid?.restTimeShots.restSeconds">
+        <mat-error *ngIf="formValidator?.restSecondsShot?.errors?.min">
           Must be greater than zero
         </mat-error>
-        <mat-error *ngIf="formValidator?.restTimeReps?.errors?.required">
+        <mat-error *ngIf="formValidator?.restSecondsShot?.errors?.required">
           Mandatory
         </mat-error>
       </mat-form-field>

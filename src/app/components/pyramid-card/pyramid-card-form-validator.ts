@@ -7,16 +7,16 @@ export class PyramidCardFormValidator {
 
   get basePyramid() { return this._formGroup.get('basePyramid') };
   get apexPyramid() { return this._formGroup.get('apexPyramid') };
-  get restTime() { return this._formGroup.get('restTime') };
-  get restTimeReps() { return this._formGroup.get('restTimeReps') };
+  get restSeconds() { return this._formGroup.get('restSeconds') };
+  get restSecondsShot() { return this._formGroup.get('restSecondsShot') };
   get reverse() { return this._formGroup.get('reverse') };
 
   constructor(fb: FormBuilder, pyramid: Pyramid) {
     this._formGroup = fb.group({
       basePyramid: [pyramid?.basePyramid, [Validators.required, Validators.min(1)]],
       apexPyramid: [pyramid?.apexPyramid, [Validators.required, Validators.min(1)]],
-      restTime: [pyramid?.restTime?.secondsSet, [Validators.required, Validators.min(1)]],
-      restTimeReps: [pyramid?.restTimeShots?.secondsSet, [Validators.required, Validators.min(1)]],
+      restSeconds: [pyramid?.restTime?.restSeconds, [Validators.required, Validators.min(1)]],
+      restSecondsShot: [pyramid?.restTimeShots?.restSeconds, [Validators.required, Validators.min(1)]],
       reverse: [new Boolean(pyramid?.reverse).valueOf()]
     })
 

@@ -1,7 +1,5 @@
-import { ChangeDetectorRef, Component, Input, OnChanges } from '@angular/core';
-import { RestTime } from 'src/app/models/rest-time';
+import { Component, Input } from '@angular/core';
 import { TimerService } from 'src/app/services/timer.service';
-import { TrainingService } from 'src/app/services/training.service';
 
 @Component({
   selector: 'app-timer',
@@ -12,7 +10,11 @@ export class TimerComponent {
 
   @Input() countdown: boolean;
 
-  constructor(public timerService: TimerService) { }
+  constructor(public timerService: TimerService) {
+    this.timerService.getSecondsLeft().subscribe(res => {
+      console.log(res);
+    })
+  }
 
 
 
