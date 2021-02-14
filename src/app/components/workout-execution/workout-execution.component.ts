@@ -7,13 +7,13 @@ import { TrainingService } from 'src/app/services/training.service';
   templateUrl: './workout-execution.component.html',
   styleUrls: ['./workout-execution.component.scss']
 })
-export class WorkoutExecutionComponent implements OnInit {
+export class WorkoutExecutionComponent {
 
   @Input() training: Training;
 
-  constructor(public trainingService: TrainingService) { }
+  constructor() { }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
+    this.training
   }
-
 }

@@ -28,17 +28,24 @@ export class TimerService {
   async startTimer(seconds: number, timerSound?: TimerSoundsEnum): Promise<boolean> {
     this._secondsLeft$.next(seconds);
     this._timer.start();
+    if (timerSound) {
+      this.playSound(timerSound);
+    }
     return new Promise(async resolve => {
       this._timer.every(`1 s`, () => {
         this.updateSecondsValue();
       });
       this._timer.after(`${seconds} s`, () => {
-        this.playSound(timerSound);
+        // this.playSound(timerSound);
         this._timer.clear();
         this.resetSecondsValue();
         resolve(true);
       })
     });
+  }
+
+  stopTimer() {
+    this._timer?.stop();
   }
 
   updateSecondsValue() {
@@ -48,34 +55,12 @@ export class TimerService {
     this._secondsElapsed$.next(secondsElapsed + 1);
   }
 
-
-
-  /*
-  stopTimer() {
-    this._timer.stop();
-  }
-
-  pauseTimer() {
-    this._timer.pause();
-  }
-
-  resumeTimer() {
-    this._timer.resume();
-  }
-  */
-
   resetSecondsValue() {
     this._secondsLeft$.next(0);
     this._secondsElapsed$.next(0);
   }
 
   //#region observables getter
-  /*
-  getTimerStatus() {
-    return this._timerStatus$.asObservable().pipe(share());
-  }
-  */
-
   getSecondsLeft(): Observable<number> {
     return this._secondsLeft$.asObservable().pipe(share());
   }

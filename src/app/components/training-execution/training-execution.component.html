@@ -1,16 +1,29 @@
-<!--h2 class="text-center">
-  {{ (trainingService.getTrainingSelected() | async)?.status }}
-</h2-->
+<app-status-title> </app-status-title>
 
-<div class="row">
+<div *ngIf="(appStatusService.getTrainingStatus() | async) == TrainingStatusEnum.Workout" class="mat-h2 text-center">
+  <app-workout-execution [training]="training"></app-workout-execution>
+</div>
+
+<div class="mat-h3 text-center">
+
+  <div *ngIf="showRepsToDo">
+    Do {{ repsToDo }} reps
+  </div>
+
+  <div *ngIf="!showRepsToDo && (appStatusService.getTrainingStatus() | async) == TrainingStatusEnum.Workout">
+    Rest
+  </div>
+
+</div>
+
+<div class="row" *ngIf="showTimer">
   <div class="col-12 d-flex justify-content-center align-items-center">
-    <app-timer
-      [countdown]="configService?.config?.countdownTimer">
+    <app-timer [countdown]="configService?.config?.countdownTimer">
     </app-timer>
   </div>
 </div>
 
 
-<!--app-workout-execution [training]="training"></app-workout-execution>
 
-<app-training-execution-buttons></app-training-execution-buttons-->
+
+<!--app-training-execution-buttons></app-training-execution-buttons-->

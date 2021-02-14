@@ -1,10 +1,4 @@
 <h2>
-  Pyramids done: {{ training?.workout?.getPyramidsDone() | async }}
+  Remaining pyramids: {{ training?.workout?.getRemainingPyramids() | async }}
   of: {{ training?.workout?.pyramids?.length }}
 </h2>
-
-<div class="row">
-  <div class="col-12">
-    <app-pyramid-execution></app-pyramid-execution>
-  </div>
-</div>

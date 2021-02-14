@@ -16,9 +16,9 @@ import { PyramidCardComponent } from './components/pyramid-card/pyramid-card.com
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { ConfigComponent } from './components/config/config.component';
-import { PyramidExecutionComponent } from './components/pyramid-execution/pyramid-execution.component';
 import { WorkoutExecutionComponent } from './components/workout-execution/workout-execution.component';
 import { TrainingExecutionButtonsComponent } from './components/training-execution-buttons/training-execution-buttons.component';
+import { AppStatusTitleComponent } from './components/app-status-title/app-status-title.component';
 
 @NgModule({
   declarations: [
@@ -33,9 +33,9 @@ import { TrainingExecutionButtonsComponent } from './components/training-executi
     DividerComponent,
     PyramidCardComponent,
     ConfigComponent,
-    PyramidExecutionComponent,
     WorkoutExecutionComponent,
-    TrainingExecutionButtonsComponent
+    TrainingExecutionButtonsComponent,
+    AppStatusTitleComponent
   ],
   imports: [
     BrowserModule,

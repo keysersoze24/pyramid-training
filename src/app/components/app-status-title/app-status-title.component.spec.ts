@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PyramidExecutionComponent } from './pyramid-execution.component';
+import { AppStatusTitleComponent } from './app-status-title.component';
 
-describe('PyramidExecutionComponent', () => {
-  let component: PyramidExecutionComponent;
-  let fixture: ComponentFixture<PyramidExecutionComponent>;
+describe('AppStatusTitleComponent', () => {
+  let component: AppStatusTitleComponent;
+  let fixture: ComponentFixture<AppStatusTitleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PyramidExecutionComponent ]
+      declarations: [ AppStatusTitleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PyramidExecutionComponent);
+    fixture = TestBed.createComponent(AppStatusTitleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,8 +8,6 @@ export enum TrainingStatusEnum {
   // Stop = 'Stop',
   PreWorkout = 'Pre workout',
   Workout = 'Workout',
-  PyramidStep = 'PyramidStep',
-  PyramidShot = 'PyramidShot',
   PostWorkout = 'Post workout',
   Finish = 'Finish'
 }

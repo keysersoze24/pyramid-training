@@ -9,6 +9,7 @@ export class Workout {
   pyramids: Pyramid [] = [];
   private _currentPyramid$: BehaviorSubject<Pyramid> = new BehaviorSubject(null);
   private _pyramidsDone$: BehaviorSubject<number> = new BehaviorSubject(0);
+  private _remainingPyramids$: BehaviorSubject<number> = new BehaviorSubject(null);
 
 
   getCurrentPyramid(): Observable<Pyramid> {
@@ -29,6 +30,15 @@ export class Workout {
 
   updatePyramidsDone(pyramidsDone: number): void {
     this._pyramidsDone$.next(pyramidsDone);
+  }
+
+
+  getRemainingPyramids(): Observable<number> {
+    return this._remainingPyramids$.asObservable().pipe(share());
+  }
+
+  updateRemainingPyramids(remainingPyramids: number) {
+    this._remainingPyramids$.next(remainingPyramids);
   }
 
   constructor(secondsRest: number) {

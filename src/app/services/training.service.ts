@@ -34,7 +34,6 @@ export class TrainingService {
     }
   }
 
-
   getAllTrainings(): Observable<Training[]> {
     return this._allTrainings$.asObservable().pipe(share());
   }
@@ -45,7 +44,13 @@ export class TrainingService {
 
   saveTraining(training: Training): void {
     let trainings = this._allTrainings$.getValue();
-    trainings.push(training);
+    const existingTrainingIndex = trainings.findIndex(_ => _.id == training.id);
+    if (existingTrainingIndex >= 0) {
+      trainings.splice(existingTrainingIndex, 1, training);
+    }
+    else {
+      trainings.push(training);
+    }
     Utilities.setLocalStorageItem(LocalStorageKeyEnum.Trainings, trainings);
     this._allTrainings$.next(trainings);
   }
