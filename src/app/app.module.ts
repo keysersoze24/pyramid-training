@@ -19,6 +19,8 @@ import { ConfigComponent } from './components/config/config.component';
 import { WorkoutExecutionComponent } from './components/workout-execution/workout-execution.component';
 import { TrainingExecutionButtonsComponent } from './components/training-execution-buttons/training-execution-buttons.component';
 import { AppStatusTitleComponent } from './components/app-status-title/app-status-title.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { AppStatusTitleComponent } from './components/app-status-title/app-statu
     BrowserAnimationsModule,
     AngularMaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
